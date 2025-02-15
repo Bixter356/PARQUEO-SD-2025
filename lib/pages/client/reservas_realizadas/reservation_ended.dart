@@ -26,7 +26,11 @@ class ReservasFinalizadasCliente extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reservas Finalizadas'),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        title: const Text('Reservas Finalizadas' , style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF02335B),
         automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<QuerySnapshot>(

@@ -22,7 +22,12 @@ class ReservasActivasCliente extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reservas Activas'),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        title: const Text('Reservas Activas', style: TextStyle(color: Colors.white), 
+        ),
+        backgroundColor: const Color(0xFF02335B),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getReservasStream(),

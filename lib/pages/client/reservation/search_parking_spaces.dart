@@ -298,18 +298,21 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
         centerTitle: true,
         toolbarHeight: 70,
         titleTextStyle: const TextStyle(
-            fontSize: 25, color: Color.fromARGB(255, 7, 17, 128)),
+          fontSize: 25, color: Color.fromARGB(255, 7, 17, 128)
+        ),
         title: const Text(
           'Reserva',
+          style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: Colors.white,
           ),
           iconSize: 30,
           onPressed: () => Navigator.pop(context),
         ),
+        backgroundColor: const Color(0xFF02335B),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(23),

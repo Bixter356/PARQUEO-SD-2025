@@ -119,17 +119,17 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 2, 4, 114),
+      backgroundColor: Color(0xFF02335B),
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
           'Detalles Reserva',
-          style: TextStyle(fontSize: 25),
+          style: TextStyle(fontSize: 25 , color: Colors.white),
         ),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onPressed: () => Navigator.pop(context),
           iconSize: 35,

@@ -28,12 +28,12 @@ class _CreateVehicleState extends State<CreateVehicle> {
     
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Registrar Vehículo'),
-          backgroundColor:const Color.fromARGB(255, 76, 203, 218),
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          title: const Text('Registrar Vehículo' , style: TextStyle(color: Colors.white),),
+          backgroundColor: const Color(0xFF02335B),
         ),
-
-
-        
          body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),

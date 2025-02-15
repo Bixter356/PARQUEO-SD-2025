@@ -81,8 +81,8 @@ class _ChatPageClientState extends State<ChatPage> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(widget.receiverEmail),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.grey,
+        backgroundColor: const Color(0xFF02335B),
+        foregroundColor: const Color.fromARGB(255, 225, 225, 225),
         elevation: 0,
       ),
       body: Column(

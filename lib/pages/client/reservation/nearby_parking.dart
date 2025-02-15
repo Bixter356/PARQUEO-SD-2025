@@ -16,7 +16,7 @@ class SelectParkingScreen extends StatelessWidget {
         appBar: AppBar(
             title: const Text(
               'Parqueos Cercanos Disponibles',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white , fontSize: 18),
             ),
           leading: IconButton(
           icon: const Icon(
@@ -26,7 +26,7 @@ class SelectParkingScreen extends StatelessWidget {
           iconSize: 30,
           onPressed: () => Navigator.pop(context),
         ),
-            backgroundColor: const Color.fromARGB(255, 5, 126, 225)),
+            backgroundColor: const Color(0xFF02335B)),
         body: const PlazaListScreen(),
       ),
     );

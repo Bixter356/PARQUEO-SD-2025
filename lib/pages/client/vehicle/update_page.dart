@@ -81,8 +81,11 @@ void didChangeDependencies() {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Editar Vehículo'),
-          backgroundColor:const Color.fromARGB(255, 76, 203, 218),
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          title: const Text('Editar Vehículo' , style: TextStyle(color: Colors.white),),
+          backgroundColor: const Color(0xFF02335B),
         ),
 
         body: SingleChildScrollView(

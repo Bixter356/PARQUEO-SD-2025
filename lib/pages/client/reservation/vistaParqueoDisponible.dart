@@ -21,8 +21,8 @@ class ParqueoDisponibleListScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Parqueos disponibles en tu zona'),
-        backgroundColor: Colors.blue,
+        title: const Text('Parqueos disponibles en tu zona' , style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF02335B)
       ),
       body: StreamBuilder(
         stream: obtenerParqueosStream(),

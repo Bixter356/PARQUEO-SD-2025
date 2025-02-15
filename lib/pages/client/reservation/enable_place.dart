@@ -14,15 +14,15 @@ class SelectSpaceScreen extends StatelessWidget {
       home: Scaffold(
         
         appBar: AppBar(
-              leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back , color: Colors.white,),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            title: const Text('Plazas Disponibles'),
-            backgroundColor: const Color.fromARGB(255, 5, 126, 225)),
-            
+            title: const Text('Plazas Disponibles' , style: TextStyle(color: Colors.white),),
+            backgroundColor: const Color(0xFF02335B)
+          ),
         body: PlazaListScreen(
           dataSearch: dataSearch,
         ),

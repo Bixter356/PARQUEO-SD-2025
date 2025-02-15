@@ -28,11 +28,15 @@ class ProfilePage extends StatelessWidget {
 
               return Scaffold(
                 appBar: AppBar(
+                  iconTheme: const IconThemeData(
+                    color: Colors.white, // Color de la flecha
+                  ),
                   title: const Text(
                     'Perfil',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20 , color: Colors.white),
                   ),
                   centerTitle: true,
+                  backgroundColor: const Color(0xFF02335B)
                 ),
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
