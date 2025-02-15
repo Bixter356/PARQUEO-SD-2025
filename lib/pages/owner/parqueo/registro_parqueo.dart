@@ -177,7 +177,7 @@ class RegistroParqueoScreenState extends State<RegistroParqueoScreen> {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: Color(0xFFFFFFFF),
           ),
           iconSize: 30,
         ),

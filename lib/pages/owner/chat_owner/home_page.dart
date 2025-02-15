@@ -29,8 +29,8 @@ class _HomeChatOwnerScreenState extends State<HomeChatOwnerScreen> {
           backgroundColor: Theme.of(context).colorScheme.background,
 
           appBar: AppBar(
-            title: const Text("Chats"),
-            backgroundColor: const Color.fromARGB(0, 7, 37, 209),
+            title: const Text("Chats" , style: TextStyle(color: Colors.white),),
+            backgroundColor: const Color(0xFF041657),
             foregroundColor: Color.fromARGB(255, 59, 59, 59),
             elevation: 0,
           ),

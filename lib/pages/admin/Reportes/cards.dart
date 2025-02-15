@@ -64,7 +64,7 @@ class Cards extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: const Color(0xFF041657),
     );
   }
 }

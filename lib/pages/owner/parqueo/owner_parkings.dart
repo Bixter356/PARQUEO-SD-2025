@@ -19,8 +19,11 @@ class ParkingListScreenState extends State<ParkingListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Colors.white, 
+          ),
           title: const Text('Mis parqueos' , style: TextStyle(color: Colors.white),),
-          backgroundColor: const Color(0xFF02335B)
+          backgroundColor: const Color(0xFF041657),
         ),
         body: StreamBuilder(
         stream: getParking(),

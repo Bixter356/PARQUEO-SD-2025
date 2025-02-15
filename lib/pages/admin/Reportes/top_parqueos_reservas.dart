@@ -6,7 +6,8 @@ class ReportScreenParkingReserves extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ranking de parqueos con mas reservaciones'),
+        title: Text('Ranking de parqueos con mas reservaciones', style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF041657),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('reserva').get(),

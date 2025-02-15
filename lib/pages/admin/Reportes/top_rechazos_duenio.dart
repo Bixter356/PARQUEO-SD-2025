@@ -8,7 +8,8 @@ class ReportScreenRejectOwner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ranking de rechazo de dueños'),
+        title: const Text('Ranking de rechazo de dueños', style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF041657),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('reserva').get(),

@@ -10,16 +10,17 @@ class CreatePlaceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back , color: Colors.white,),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
             title: const Text('Lista de Plazas', style: TextStyle(color: Colors.white),),
-            backgroundColor: const Color(0xFF02335B),
+            backgroundColor: const Color(0xFF041657),
           ),
         body: PlazaListScreen(seccionRef: seccionRef),
       ),
@@ -157,8 +158,11 @@ class AgregarPlazaScreenState extends State<AgregarPlazaScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agregar Nueva Plaza'),
-        backgroundColor: Colors.blue,
+        iconTheme: const IconThemeData(
+          color: Colors.white, 
+        ),
+        title: const Text('Agregar Nueva Plaza', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFF041657),
       ),
       body: SingleChildScrollView(
         child: Padding(

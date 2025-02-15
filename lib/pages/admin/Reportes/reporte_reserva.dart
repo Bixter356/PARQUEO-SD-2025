@@ -8,9 +8,10 @@ class ReportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cantidad total de horas reservadas'),
+        title: const Text('Cantidad total de horas reservadas', style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF041657),
       ),
-      backgroundColor: Colors.blue, 
+      backgroundColor: const Color(0xFF041657), 
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('reserva').get(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

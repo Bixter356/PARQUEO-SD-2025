@@ -19,8 +19,11 @@ class ReservasPendientes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white, 
+        ),
         title: const Text('Reservas Pendientes' , style: TextStyle(color: Colors.white) ),
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF041657),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getReservasStream(),
@@ -53,7 +56,7 @@ class ReservasPendientes extends StatelessWidget {
               model: data['vehiculo']['marcaVehiculo'],
               plate: data['vehiculo']['placaVehiculo'],
               status: data['estado'],
-              total: data['total'],
+              total: data['total'].toDouble(),
               typeVehicle: data['vehiculo']['tipo'],
               id: document.id,
             );

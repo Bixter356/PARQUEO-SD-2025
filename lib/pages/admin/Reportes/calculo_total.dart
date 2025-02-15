@@ -6,7 +6,8 @@ class ReportScreenTotal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calculo De total gastado por cliente'),
+        title: Text('Calculo De total gastado por cliente', style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF041657),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('reserva').get(),

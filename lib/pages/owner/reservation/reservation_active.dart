@@ -18,7 +18,11 @@ class ReservasActivas extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reservas Activas'),
+        iconTheme: const IconThemeData(
+          color: Colors.white, 
+        ),
+        title: const Text('Reservas Activas', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFF041657),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getReservasStream(),
@@ -54,7 +58,7 @@ class ReservasActivas extends StatelessWidget {
               model: data['vehiculo']['marcaVehiculo'],
               plate: data['vehiculo']['placaVehiculo'],
               status: data['estado'],
-              total: data['total'],
+              total: data['total'].toDouble(),
               typeVehicle: data['vehiculo']['tipo'],
               id: document.id,
               idPlaza: data['idPlaza'].toString(),
