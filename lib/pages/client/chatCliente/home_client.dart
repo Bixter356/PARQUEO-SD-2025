@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:parking_project/components/user_tile.dart';
-import 'package:parking_project/services/chat_service.dart';
+import 'package:app_3_27_4/components/user_tile.dart';
+import 'package:app_3_27_4/services/chat_service.dart';
 import 'chat_client.dart';
 
 

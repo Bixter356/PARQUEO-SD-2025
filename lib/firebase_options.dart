@@ -23,9 +23,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
@@ -42,47 +48,29 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBCgFG0q02uzCGwSPsXgjv_BVaevKzhUls',
-    appId: '1:1096954431507:web:cf705610970b43339f57e6',
-    messagingSenderId: '1096954431507',
-    projectId: 'park-project-3cd64',
-    authDomain: 'park-project-3cd64.firebaseapp.com',
-    storageBucket: 'park-project-3cd64.appspot.com',
-    measurementId: 'G-7TT6T9JMWW',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyASuBwvSdO5A-YmZb8AmoniUBQ0RzMAaj4',
-    appId: '1:1096954431507:android:1e42d42fdcaece249f57e6',
-    messagingSenderId: '1096954431507',
-    projectId: 'park-project-3cd64',
-    storageBucket: 'park-project-3cd64.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAO26ZktL8uDsGLitkcN0Jr96yN4dl6BO4',
-    appId: '1:1096954431507:ios:2b295ff2ac88c5bd9f57e6',
-    messagingSenderId: '1096954431507',
-    projectId: 'park-project-3cd64',
-    storageBucket: 'park-project-3cd64.appspot.com',
-    iosBundleId: 'com.example.parkingProject',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAO26ZktL8uDsGLitkcN0Jr96yN4dl6BO4',
-    appId: '1:1096954431507:ios:2b295ff2ac88c5bd9f57e6',
-    messagingSenderId: '1096954431507',
-    projectId: 'park-project-3cd64',
-    storageBucket: 'park-project-3cd64.appspot.com',
-    iosBundleId: 'com.example.parkingProject',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBCgFG0q02uzCGwSPsXgjv_BVaevKzhUls',
     appId: '1:1096954431507:web:1d1b4e20e2fe21ac9f57e6',
     messagingSenderId: '1096954431507',
     projectId: 'park-project-3cd64',
     authDomain: 'park-project-3cd64.firebaseapp.com',
     storageBucket: 'park-project-3cd64.appspot.com',
     measurementId: 'G-EKMEG3YGVV',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyASuBwvSdO5A-YmZb8AmoniUBQ0RzMAaj4',
+    appId: '1:1096954431507:android:303e3679f3904c939f57e6',
+    messagingSenderId: '1096954431507',
+    projectId: 'park-project-3cd64',
+    storageBucket: 'park-project-3cd64.appspot.com',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDfkGM8sRB58rQ5Kbu5_ELErz_xCO9PaJk',
+    appId: '1:1096954431507:web:21a6f5cc932306fd9f57e6',
+    messagingSenderId: '1096954431507',
+    projectId: 'park-project-3cd64',
+    authDomain: 'park-project-3cd64.firebaseapp.com',
+    storageBucket: 'park-project-3cd64.appspot.com',
+    measurementId: 'G-BLTG6KM741',
   );
 }

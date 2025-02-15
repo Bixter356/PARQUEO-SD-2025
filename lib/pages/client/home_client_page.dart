@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:parking_project/pages/client/reservas_realizadas/reservas_activas.dart';
-import 'package:parking_project/pages/client/reservas_realizadas/reservas_pendientes.dart';
-import 'package:parking_project/pages/client/reservation/nearby_parking.dart';
-import 'package:parking_project/pages/map/map_client.dart';
+import 'package:app_3_27_4/pages/client/reservas_realizadas/reservas_activas.dart';
+import 'package:app_3_27_4/pages/client/reservas_realizadas/reservas_pendientes.dart';
+import 'package:app_3_27_4/pages/client/reservation/nearby_parking.dart';
+import 'package:app_3_27_4/pages/map/map_client.dart';
 
 class HomeClient extends StatelessWidget {
   const HomeClient({super.key});

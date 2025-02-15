@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:parking_project/helpers/extensions.dart';
-import 'package:parking_project/models/coleccion/collection_field.dart';
-import 'package:parking_project/models/coleccion/collections.dart';
-import 'package:parking_project/models/user.dart';
-import 'package:parking_project/routes/routes.dart';
-import 'package:parking_project/utilities/progressbar.dart';
-import 'package:parking_project/utilities/toast.dart';
+import 'package:app_3_27_4/helpers/extensions.dart';
+import 'package:app_3_27_4/models/coleccion/collection_field.dart';
+import 'package:app_3_27_4/models/coleccion/collections.dart';
+import 'package:app_3_27_4/models/user.dart';
+import 'package:app_3_27_4/routes/routes.dart';
+import 'package:app_3_27_4/utilities/progressbar.dart';
+import 'package:app_3_27_4/utilities/toast.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/Register-screen';

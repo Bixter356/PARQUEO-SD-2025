@@ -6,10 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart';
-import 'package:parking_project/models/coleccion/collection_field.dart';
-import 'package:parking_project/models/coleccion/collections.dart';
-import 'package:parking_project/models/to_use/parking.dart';
-import 'package:parking_project/pages/client/navigation_bar.dart';
+import 'package:app_3_27_4/models/coleccion/collection_field.dart';
+import 'package:app_3_27_4/models/coleccion/collections.dart';
+import 'package:app_3_27_4/models/to_use/parking.dart';
+import 'package:app_3_27_4/pages/client/navigation_bar.dart';
 
 class ReservaRegisterScreen extends StatefulWidget {
   final DataReservationSearch dataSearch;
@@ -506,7 +506,7 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
                       Center(
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            padding: WidgetStateProperty.all(
+                            padding: MaterialStateProperty.all(
                               const EdgeInsets.only(
                                 left: 80,
                                 right: 80,
@@ -515,8 +515,8 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
                               ),
                             ),
                             backgroundColor:
-                                WidgetStateProperty.all(Colors.red[500]),
-                            shape: WidgetStateProperty.all<
+                                MaterialStateProperty.all(Colors.red[500]),
+                            shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),

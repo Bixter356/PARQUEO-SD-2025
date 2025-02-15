@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:parking_project/pages/owner/chat_owner/home_page.dart';
-import 'package:parking_project/pages/owner/home_owner_screen.dart';
-import 'package:parking_project/pages/owner/reservation/reservation_calificar.dart';
-import 'package:parking_project/pages/owner/reservation/reservation_request.dart';
-import 'package:parking_project/pages/profile.dart';
+import 'package:app_3_27_4/pages/owner/chat_owner/home_page.dart';
+import 'package:app_3_27_4/pages/owner/home_owner_screen.dart';
+import 'package:app_3_27_4/pages/owner/reservation/reservation_calificar.dart';
+import 'package:app_3_27_4/pages/owner/reservation/reservation_request.dart';
+import 'package:app_3_27_4/pages/profile.dart';
 
 class MenuOwner extends StatefulWidget {
   const MenuOwner({super.key});

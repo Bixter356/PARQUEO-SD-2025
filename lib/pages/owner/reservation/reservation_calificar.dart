@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:parking_project/models/to_use/reservation_request.dart';
+import 'package:app_3_27_4/models/to_use/reservation_request.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:parking_project/services/temporal.dart';
+import 'package:app_3_27_4/services/temporal.dart';
 //import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ReservasFinalizadas extends StatelessWidget {

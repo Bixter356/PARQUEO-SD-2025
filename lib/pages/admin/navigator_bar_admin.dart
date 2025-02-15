@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:parking_project/pages/admin/accounts_request.dart';
-import 'package:parking_project/pages/admin/home_admin.dart';
-import 'package:parking_project/pages/profile.dart';
+import 'package:app_3_27_4/pages/admin/accounts_request.dart';
+import 'package:app_3_27_4/pages/admin/home_admin.dart';
+import 'package:app_3_27_4/pages/profile.dart';
 
 class MenuAdmin extends StatefulWidget {
   const MenuAdmin({super.key});

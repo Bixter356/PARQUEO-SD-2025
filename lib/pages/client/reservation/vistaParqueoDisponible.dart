@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:parking_project/models/Parqueo.dart';
-import 'package:parking_project/models/to_use/parking.dart';
-import 'package:parking_project/pages/client/reservation/search_parking_spaces.dart';
+import 'package:app_3_27_4/models/Parqueo.dart';
+import 'package:app_3_27_4/models/to_use/parking.dart';
+import 'package:app_3_27_4/pages/client/reservation/search_parking_spaces.dart';
 
 class ParqueoDisponibleListScreen extends StatefulWidget {
   const ParqueoDisponibleListScreen({super.key});

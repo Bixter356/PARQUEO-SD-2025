@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:intl/intl.dart';
-import 'package:parking_project/helpers/extensions.dart';
-import 'package:parking_project/models/to_use/parking.dart';
-import 'package:parking_project/pages/owner/parqueo/owner_parkings.dart';
-import 'package:parking_project/routes/routes.dart';
-import 'package:parking_project/services/temporal.dart';
+import 'package:app_3_27_4/helpers/extensions.dart';
+import 'package:app_3_27_4/models/to_use/parking.dart';
+import 'package:app_3_27_4/pages/owner/parqueo/owner_parkings.dart';
+import 'package:app_3_27_4/routes/routes.dart';
+import 'package:app_3_27_4/services/temporal.dart';
 
 class MapOwner extends StatefulWidget {
   const MapOwner({super.key});

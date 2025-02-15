@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:parking_project/models/to_use/parking.dart';
-import 'package:parking_project/pages/owner/parqueo/registro_parqueo.dart';
-import 'package:parking_project/pages/owner/plaza/create_place.dart';
+import 'package:app_3_27_4/models/to_use/parking.dart';
+import 'package:app_3_27_4/pages/owner/parqueo/registro_parqueo.dart';
+import 'package:app_3_27_4/pages/owner/plaza/create_place.dart';
 
 
 class ParkingListScreen extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:parking_project/pages/client/Vehicle/home_page.dart';
-import 'package:parking_project/pages/client/chatCliente/home_client.dart';
-import 'package:parking_project/pages/client/reservas_realizadas/reservation_ended.dart';
-import 'package:parking_project/pages/client/home_client_page.dart';
-import 'package:parking_project/pages/profile.dart';
+import 'package:app_3_27_4/pages/client/Vehicle/home_page.dart';
+import 'package:app_3_27_4/pages/client/chatCliente/home_client.dart';
+import 'package:app_3_27_4/pages/client/reservas_realizadas/reservation_ended.dart';
+import 'package:app_3_27_4/pages/client/home_client_page.dart';
+import 'package:app_3_27_4/pages/profile.dart';
 
 class MenuClient extends StatefulWidget {
   const MenuClient({super.key});

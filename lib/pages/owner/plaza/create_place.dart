@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:parking_project/models/to_use/parking.dart';
+import 'package:app_3_27_4/models/to_use/parking.dart';
 
 class CreatePlaceScreen extends StatelessWidget {
   static const routeName = '/create-place-srceen';

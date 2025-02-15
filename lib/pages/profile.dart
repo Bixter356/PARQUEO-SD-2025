@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:parking_project/models/auth/auth_service.dart';
-import 'package:parking_project/models/coleccion/collections.dart';
-import 'package:parking_project/pages/login/login_screen.dart';
-import 'package:parking_project/utilities/progressbar.dart';
+import 'package:app_3_27_4/models/auth/auth_service.dart';
+import 'package:app_3_27_4/models/coleccion/collections.dart';
+import 'package:app_3_27_4/pages/login/login_screen.dart';
+import 'package:app_3_27_4/utilities/progressbar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

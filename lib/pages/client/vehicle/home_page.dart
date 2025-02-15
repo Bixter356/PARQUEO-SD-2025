@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:parking_project/pages/client/vehicle/create_page.dart';
-import 'package:parking_project/pages/client/vehicle/update_page.dart';
-import 'package:parking_project/services/temporal.dart';
+import 'package:app_3_27_4/pages/client/vehicle/create_page.dart';
+import 'package:app_3_27_4/pages/client/vehicle/update_page.dart';
+import 'package:app_3_27_4/services/temporal.dart';
 
 
 class VehicleScreen extends StatefulWidget {

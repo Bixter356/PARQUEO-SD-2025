@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:parking_project/models/to_use/reservation_request.dart';
+import 'package:app_3_27_4/models/to_use/reservation_request.dart';
 
 class ReservasActivas extends StatelessWidget {
   const ReservasActivas({super.key});

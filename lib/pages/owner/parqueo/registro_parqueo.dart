@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_location_picker/flutter_map_location_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:parking_project/helpers/extensions.dart';
-import 'package:parking_project/routes/routes.dart';
-import 'package:parking_project/utilities/progressbar.dart';
-import 'package:parking_project/utilities/toast.dart';
+import 'package:app_3_27_4/helpers/extensions.dart';
+import 'package:app_3_27_4/routes/routes.dart';
+import 'package:app_3_27_4/utilities/progressbar.dart';
+import 'package:app_3_27_4/utilities/toast.dart';
 
 class RegistroParqueoScreen extends StatefulWidget {
   static const routeName = '/register-parking-srceen';
@@ -1221,7 +1221,7 @@ class RegistroParqueoScreenState extends State<RegistroParqueoScreen> {
                         child: ElevatedButton(
                           onHover: (value) => {if (value) {}},
                           style: ButtonStyle(
-                            padding: WidgetStatePropertyAll(
+                            padding: MaterialStatePropertyAll(
                               EdgeInsets.only(
                                 left: width / 8,
                                 right: width / 8,
@@ -1229,11 +1229,11 @@ class RegistroParqueoScreenState extends State<RegistroParqueoScreen> {
                                 bottom: 20,
                               ),
                             ),
-                            backgroundColor: WidgetStatePropertyAll<Color?>(
+                            backgroundColor: MaterialStatePropertyAll<Color?>(
                               Colors.red[500],
                             ),
                             shape:
-                                WidgetStateProperty.all<RoundedRectangleBorder>(
+                                MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
                                   10.0,

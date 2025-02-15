@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:parking_project/models/to_use/message.dart';
+import 'package:app_3_27_4/models/to_use/message.dart';
 
 class ChatService{
   //get instance off firestore

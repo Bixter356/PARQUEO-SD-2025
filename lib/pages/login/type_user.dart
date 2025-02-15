@@ -2,17 +2,17 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' show User;
 import 'package:flutter/material.dart';
-import 'package:parking_project/helpers/extensions.dart';
-import 'package:parking_project/models/auth/auth_service.dart';
-import 'package:parking_project/models/coleccion/collection_field.dart';
-import 'package:parking_project/models/coleccion/collections.dart';
-import 'package:parking_project/pages/admin/accounts_request.dart';
-import 'package:parking_project/pages/client/navigation_bar.dart';
-import 'package:parking_project/pages/login/register_screen.dart';
-import 'package:parking_project/pages/owner/navigation_owner.dart';
-import 'package:parking_project/routes/routes.dart';
-import 'package:parking_project/utilities/progressbar.dart';
-import 'package:parking_project/utilities/toast.dart';
+import 'package:app_3_27_4/helpers/extensions.dart';
+import 'package:app_3_27_4/models/auth/auth_service.dart';
+import 'package:app_3_27_4/models/coleccion/collection_field.dart';
+import 'package:app_3_27_4/models/coleccion/collections.dart';
+import 'package:app_3_27_4/pages/admin/accounts_request.dart';
+import 'package:app_3_27_4/pages/client/navigation_bar.dart';
+import 'package:app_3_27_4/pages/login/register_screen.dart';
+import 'package:app_3_27_4/pages/owner/navigation_owner.dart';
+import 'package:app_3_27_4/routes/routes.dart';
+import 'package:app_3_27_4/utilities/progressbar.dart';
+import 'package:app_3_27_4/utilities/toast.dart';
 
 class TypeUser extends StatelessWidget {
   static const routeName = '/login-screenge';

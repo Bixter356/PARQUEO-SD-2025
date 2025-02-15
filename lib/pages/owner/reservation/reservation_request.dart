@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:parking_project/models/to_use/reservation_request.dart';
-import 'package:parking_project/pages/owner/reservation/reservation_data.dart';
+import 'package:app_3_27_4/models/to_use/reservation_request.dart';
+import 'package:app_3_27_4/pages/owner/reservation/reservation_data.dart';
 
 class ReservasPendientes extends StatelessWidget {
   const ReservasPendientes({super.key});

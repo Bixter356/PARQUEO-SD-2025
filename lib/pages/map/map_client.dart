@@ -6,9 +6,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
-import 'package:parking_project/models/to_use/parking.dart';
-import 'package:parking_project/pages/client/reservation/vistaParqueoDisponible.dart';
-import 'package:parking_project/services/temporal.dart';
+import 'package:app_3_27_4/models/to_use/parking.dart';
+import 'package:app_3_27_4/pages/client/reservation/vistaParqueoDisponible.dart';
+import 'package:app_3_27_4/services/temporal.dart';
 
 class MapClient extends StatefulWidget {
   const MapClient({super.key});

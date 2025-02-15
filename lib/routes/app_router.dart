@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:parking_project/pages/admin/accounts_request.dart';
-import 'package:parking_project/pages/client/home_client_page.dart';
-import 'package:parking_project/pages/client/navigation_bar.dart';
-import 'package:parking_project/pages/login/login_screen.dart';
-import 'package:parking_project/pages/login/register_screen.dart';
-import 'package:parking_project/pages/map/map_client.dart';
-import 'package:parking_project/pages/map/map_owner.dart';
-import 'package:parking_project/pages/owner/form/request_data.dart';
-import 'package:parking_project/pages/owner/form/request_type.dart';
-import 'package:parking_project/pages/owner/home_owner_screen.dart';
-import 'package:parking_project/pages/owner/navigation_owner.dart';
-import 'package:parking_project/pages/owner/parqueo/registro_parqueo.dart';
-import 'package:parking_project/pages/owner/plaza/create_place.dart';
-import 'package:parking_project/routes/routes.dart';
+import 'package:app_3_27_4/pages/admin/accounts_request.dart';
+import 'package:app_3_27_4/pages/client/home_client_page.dart';
+import 'package:app_3_27_4/pages/client/navigation_bar.dart';
+import 'package:app_3_27_4/pages/login/login_screen.dart';
+import 'package:app_3_27_4/pages/login/register_screen.dart';
+import 'package:app_3_27_4/pages/map/map_client.dart';
+import 'package:app_3_27_4/pages/map/map_owner.dart';
+import 'package:app_3_27_4/pages/owner/form/request_data.dart';
+import 'package:app_3_27_4/pages/owner/form/request_type.dart';
+import 'package:app_3_27_4/pages/owner/home_owner_screen.dart';
+import 'package:app_3_27_4/pages/owner/navigation_owner.dart';
+import 'package:app_3_27_4/pages/owner/parqueo/registro_parqueo.dart';
+import 'package:app_3_27_4/pages/owner/plaza/create_place.dart';
+import 'package:app_3_27_4/routes/routes.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {

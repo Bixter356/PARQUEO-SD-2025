@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:parking_project/pages/admin/Reportes/calculo_total.dart';
-import 'package:parking_project/pages/admin/Reportes/reporte_reserva.dart';
-import 'package:parking_project/pages/admin/Reportes/top.dart';
-import 'package:parking_project/pages/admin/Reportes/top_clientes_reservas.dart';
-import 'package:parking_project/pages/admin/Reportes/top_parqueos_reservas.dart';
-import 'package:parking_project/pages/admin/Reportes/top_rechazos_cliente.dart';
-import 'package:parking_project/pages/admin/Reportes/top_rechazos_duenio.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/calculo_total.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/reporte_reserva.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/top.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/top_clientes_reservas.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/top_parqueos_reservas.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/top_rechazos_cliente.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/top_rechazos_duenio.dart';
 class HomeAdmin extends StatelessWidget {
   const HomeAdmin({super.key});
 

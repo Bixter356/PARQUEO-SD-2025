@@ -4,19 +4,20 @@
     // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+    
         {
-            "name": "Parking-Proyect",
+            "name": "app_3_27_4",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "Parking-Proyect (profile mode)",
+            "name": "app_3_27_4 (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "Parking-Proyect (release mode)",
+            "name": "app_3_27_4 (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

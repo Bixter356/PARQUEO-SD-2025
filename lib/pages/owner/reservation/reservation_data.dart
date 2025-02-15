@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:parking_project/models/to_use/reservation_request.dart';
+import 'package:app_3_27_4/models/to_use/reservation_request.dart';
 
 class ReservaRequestScreen extends StatelessWidget {
   final Reserva reserva;

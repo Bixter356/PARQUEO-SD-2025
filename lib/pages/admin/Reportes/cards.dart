@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:parking_project/pages/admin/Reportes/calculo_total.dart';
-import 'package:parking_project/pages/admin/Reportes/reporte_reserva.dart';
-import 'package:parking_project/pages/admin/Reportes/top.dart';
-import 'package:parking_project/pages/admin/Reportes/top_clientes_reservas.dart';
-import 'package:parking_project/pages/admin/Reportes/top_parqueos_reservas.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/calculo_total.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/reporte_reserva.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/top.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/top_clientes_reservas.dart';
+import 'package:app_3_27_4/pages/admin/Reportes/top_parqueos_reservas.dart';
 
 class Cards extends StatelessWidget {
   const Cards({super.key});
