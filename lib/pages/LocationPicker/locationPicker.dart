@@ -19,7 +19,7 @@ class _LocationPickerState extends State<LocationPicker> {
         appBar: AppBar(
           title: const Text(
             'Seleccione una localización',
-            style: TextStyle(fontFamily: 'Urbanist', fontSize: 25),
+            style: TextStyle(fontFamily: 'Urbanist', fontSize: 25 , color: Colors.white),
           ),
           centerTitle: true,
           leading: IconButton(
@@ -27,6 +27,7 @@ class _LocationPickerState extends State<LocationPicker> {
             onPressed: () => Navigator.pop(context),
           ),
           toolbarHeight: 60,
+          backgroundColor: const Color(0xFF02335B)
         ),
         body: SingleChildScrollView(
             child: Column(children: [

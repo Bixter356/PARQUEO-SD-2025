@@ -70,8 +70,8 @@ class ParqueoListScreenState extends State<ParqueoListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de Parqueos'),
-        backgroundColor: Colors.blue,
+        title: const Text('Lista de Parqueos',style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF02335B)
       ),
       body: StreamBuilder(       
         stream: obtenerParqueosStream(),

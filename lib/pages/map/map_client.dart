@@ -53,7 +53,7 @@ class _MapClientState extends State<MapClient> {
         ),
         title: const Text('Todos los Parqueos',
             style: TextStyle(fontSize: 20, color: Colors.white)),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF02335B)
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getAllParkings(),

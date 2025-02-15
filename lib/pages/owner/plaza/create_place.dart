@@ -18,8 +18,9 @@ class CreatePlaceScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            title: const Text('Lista de Plazas'),
-            backgroundColor: const Color.fromARGB(255, 5, 126, 225)),
+            title: const Text('Lista de Plazas', style: TextStyle(color: Colors.white),),
+            backgroundColor: const Color(0xFF02335B),
+          ),
         body: PlazaListScreen(seccionRef: seccionRef),
       ),
     );

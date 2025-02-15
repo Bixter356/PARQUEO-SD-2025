@@ -148,7 +148,8 @@ class _ReservaActivaScreenState extends State<ReservaActivaScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reservas Activas'),
+        title: const Text('Reservas Activas' , style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF02335B),
       ),
       body: SingleChildScrollView(
         child: Padding(

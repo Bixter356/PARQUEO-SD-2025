@@ -168,7 +168,8 @@ class _ReservaFinalizadaScreenState extends State<ReservaFinalizadaScreen> {
     int number = 0;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reservas Finalizadas'),
+        title: const Text('Reservas Finalizadas' , style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF02335B),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -161,13 +161,14 @@ class RegistroParqueoScreenState extends State<RegistroParqueoScreen> {
     //final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 65, 100, 140),
+        backgroundColor: const Color(0xFF02335B),
         title: const Text(
           "Registro de Parqueo",
           style: TextStyle(
             fontFamily: 'Urbanist',
             fontWeight: FontWeight.w800,
             fontSize: 30,
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
@@ -176,7 +177,7 @@ class RegistroParqueoScreenState extends State<RegistroParqueoScreen> {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.black87,
+            color: Colors.white,
           ),
           iconSize: 30,
         ),

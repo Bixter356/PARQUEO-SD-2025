@@ -13,7 +13,8 @@ class ReservaRequestScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reservas Pendientes'),
+        title: const Text('Reservas Pendientes' , style: TextStyle(color: Colors.white) ),
+        backgroundColor: const Color(0xFF02335B),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -19,8 +19,9 @@ class ParkingListScreenState extends State<ParkingListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: const Text('Mis parqueos'),
-        backgroundColor: const Color.fromARGB(255, 5, 126, 225)),
+          title: const Text('Mis parqueos' , style: TextStyle(color: Colors.white),),
+          backgroundColor: const Color(0xFF02335B)
+        ),
         body: StreamBuilder(
         stream: getParking(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

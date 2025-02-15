@@ -31,7 +31,7 @@ class _MapOwnerState extends State<MapOwner> {
         ),
         title: const Text('Parqueos Registrados',
             style: TextStyle(fontSize: 20, color: Colors.white)),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF02335B)
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getParkingsByOwner(FirebaseAuth.instance.currentUser!.uid), //OJO ---------------------------------------

@@ -230,10 +230,13 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 5, 126, 225),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        backgroundColor: const Color(0xFF02335B),
         title: Text(
           nombreParqueoController.text,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold , color: Colors.white),
         ),
         centerTitle: true,
       ),
@@ -666,7 +669,7 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: const Color.fromARGB(255, 253, 184, 57),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                       30.0,
