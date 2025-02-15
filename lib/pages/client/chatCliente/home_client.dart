@@ -4,8 +4,6 @@ import 'package:app_3_27_4/components/user_tile.dart';
 import 'package:app_3_27_4/services/chat_service.dart';
 import 'chat_client.dart';
 
-
-
 class HomeChatClientScreen extends StatefulWidget {
   const HomeChatClientScreen({super.key});
 
@@ -13,77 +11,71 @@ class HomeChatClientScreen extends StatefulWidget {
   State<HomeChatClientScreen> createState() => _HomeChatClientScreenState();
 }
 
-
 class _HomeChatClientScreenState extends State<HomeChatClientScreen> {
-
-  
   final ChatService _chatService = ChatService();
   //final AuthService _authService = AuthService();
 
-    @override
-      Widget build(BuildContext context) {
-        return Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
 
-          appBar: AppBar(
-            title: const Text("Chats"),
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.grey,
-            elevation: 0,
-          ),
+      appBar: AppBar(
+        title: const Text("Chats"),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey,
+        elevation: 0,
+        //quitar la flecha de regreso
+        automaticallyImplyLeading: false,
+      ),
 
+      // drawer: const MyDrawer(),
 
-         // drawer: const MyDrawer(),
-
-          body: _buildUserList(),
-        );
-      }
-
+      body: _buildUserList(),
+    );
+  }
 
 //--------------------------------------------------------------------------------
 
-
-     Widget _buildUserList(){
+  Widget _buildUserList() {
     return StreamBuilder(
-      stream: _chatService.getReservationsAndOwners(), 
-      builder: (context, snapshot){
+      stream: _chatService.getReservationsAndOwners(),
+      builder: (context, snapshot) {
         //error
-        if(snapshot.hasError){
+        if (snapshot.hasError) {
           return const Text("Error");
         }
         //loading
-        if(snapshot.connectionState == ConnectionState.waiting){
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text("Cargando..");
         }
         //return list view
         return ListView(
-          children: snapshot.data!.map<Widget>((userData) => _buildUserListItem(userData, context))
-          .toList(),
+          children: snapshot.data!
+              .map<Widget>((userData) => _buildUserListItem(userData, context))
+              .toList(),
         );
       },
     );
-    }
-
-
-
-
+  }
 
 //--------------------------------------------------------
-Widget  _buildUserListItem(
-    Map<String, dynamic> userData, BuildContext context) {
+  Widget _buildUserListItem(
+      Map<String, dynamic> userData, BuildContext context) {
     //Muestra todos los usuarios, menos el actual
-    if(userData["correo"] != FirebaseAuth.instance.currentUser?.email){ ///
+    if (userData["correo"] != FirebaseAuth.instance.currentUser?.email) {
+      ///
 
-     //userData['uid'] = FirebaseAuth.instance.currentUser?.uid;
-     return UserTile(
-
-
-        text: userData["correo"] + "\n " + userData['nombre'] +" "+userData['apellido'], 
-
-
-        onTap: (){
+      //userData['uid'] = FirebaseAuth.instance.currentUser?.uid;
+      return UserTile(
+        text: userData["correo"] +
+            "\n " +
+            userData['nombre'] +
+            " " +
+            userData['apellido'],
+        onTap: () {
           Navigator.push(
-            context, 
+            context,
             MaterialPageRoute(
               builder: (context) => ChatPage(
                 receiverEmail: userData["correo"],
@@ -93,18 +85,8 @@ Widget  _buildUserListItem(
           );
         },
       );
-    }else{
+    } else {
       return Container();
     }
   }
 }
-
-
-
-
-
-
-
-
-
-

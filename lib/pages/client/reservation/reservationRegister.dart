@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart';
 import 'package:app_3_27_4/models/coleccion/collection_field.dart';
@@ -90,7 +89,8 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
         checkboxValues[2] = true;
       }
       estadoController.text = dataPlace['estado'];
-      urlImage = dataParking['url'];
+      //urlImage = dataParking['url'];
+      urlImage = 'https://ultrahogares.com/wp-content/uploads/2020/02/parqueo.jpg';
 
       //instanciamos el id del Duenio
       widget.dataSearch.idDuenio = dataParking['idDuenio'];
@@ -144,11 +144,15 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
               child: Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(24),
-                  child: Image.network(
-                    urlImage,
-                    width: 215,
-                    height: 190,
-                    fit: BoxFit.cover,
+                  // child: Image.network(
+                  //   urlImage,
+                  //   width: 215,
+                  //   height: 190,
+                  //   fit: BoxFit.cover,
+                  // ),
+                  child: SizedBox(
+                    width: 10,
+                    height: 10,
                   ),
                 ),
               ),
@@ -506,7 +510,7 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
                       Center(
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
+                            padding: WidgetStateProperty.all(
                               const EdgeInsets.only(
                                 left: 80,
                                 right: 80,
@@ -515,9 +519,9 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
                               ),
                             ),
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.red[500]),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
+                                WidgetStateProperty.all(Colors.red[500]),
+                            shape:
+                                WidgetStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -572,7 +576,9 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
                               'calificacionDuenio': false,
                               'calificacionCliente': false,
                             };
-                            agregarReserva(datos: data);
+                            log('reserva en curso');
+                            await agregarReserva(datos: data);
+                            log('reserva agregada');
                             if (!context.mounted) return;
                             Navigator.push(
                               context,

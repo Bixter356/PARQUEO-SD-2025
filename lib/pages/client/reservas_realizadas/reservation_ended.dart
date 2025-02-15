@@ -27,6 +27,7 @@ class ReservasFinalizadasCliente extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Reservas Finalizadas'),
+        automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getReservasStream(),

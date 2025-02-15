@@ -26,6 +26,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 43, 120, 146),
         title: const Text('Lista de vehículos'),   
+        automaticallyImplyLeading: false,
       ),
 
        //------------------------------------------------------
