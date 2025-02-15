@@ -16,6 +16,7 @@ class Reserva {
   String? idCliente;
   String? idDuenio;
   String? idPlaza;
+  String? idParqueo;
 
   Reserva({
     required this.id,
@@ -34,5 +35,6 @@ class Reserva {
     this.idCliente,
     this.idDuenio,
     this.idPlaza,
+    this.idParqueo,
   });
 }

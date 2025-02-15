@@ -64,7 +64,7 @@ class ReservasFinalizadasCliente extends StatelessWidget {
               model: data['vehiculo']['marcaVehiculo'],
               plate: data['vehiculo']['placaVehiculo'],
               status: data['estado'],
-              total: data['total'],
+              total: data['total'].toDouble(),
               typeVehicle: data['vehiculo']['tipo'],
               id: document.id,
               idDuenio: data['parqueo']['idDuenio'],
