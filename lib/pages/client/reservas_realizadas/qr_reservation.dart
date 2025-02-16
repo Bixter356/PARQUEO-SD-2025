@@ -2,6 +2,7 @@ import 'package:app_3_27_4/pages/client/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+
 class ReservationQRPage extends StatelessWidget {
   final String qrData;
 
