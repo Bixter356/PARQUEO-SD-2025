@@ -1,21 +1,24 @@
+import 'dart:developer';
+
+import 'package:app_3_27_4/pages/client/navigation_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app_3_27_4/models/to_use/reservation_request.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 //import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ReservasActivasCliente extends StatelessWidget {
   const ReservasActivasCliente({super.key});
 
   Stream<QuerySnapshot> getReservasStream() {
-
     //QuerySnapshot parqueos = FirebaseFirestore.instance.collection('parqueo').get() as QuerySnapshot;
 
     return FirebaseFirestore.instance
-      .collection('reserva')
-      .where('idCliente', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .where('estado', isEqualTo: 'activo')
-      .snapshots();
+        .collection('reserva')
+        .where('idCliente', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('estado', isEqualTo: 'activo')
+        .snapshots();
   }
 
   @override
@@ -46,6 +49,9 @@ class ReservasActivasCliente extends StatelessWidget {
           List<Reserva> reservas =
               snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+            DocumentReference docc = data['idParqueo'];
+            DocumentReference docc2 = data['idPlaza'];
+
 
             // DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.doc(data['idVehiculo']).get();
             // Map<String, dynamic> vehiculoData = documentSnapshot.data() as Map<String, dynamic>;
@@ -64,10 +70,12 @@ class ReservasActivasCliente extends StatelessWidget {
               model: data['vehiculo']['marcaVehiculo'],
               plate: data['vehiculo']['placaVehiculo'],
               status: data['estado'],
-              total: data['total'],
+              total: data['total'].toDouble(),
               typeVehicle: data['vehiculo']['tipo'],
               id: document.id,
               idDuenio: data['parqueo']['idDuenio'],
+              idParqueo: docc.id,
+              idPlaza: docc2.id,
             );
           }).toList();
 
@@ -101,8 +109,9 @@ class ReservasActivasCliente extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ReservaFinalizadaClienteScreen(
-                                reserva: reservaRequest),
+                            builder: (context) =>
+                                ReservaFinalizadaClienteScreen(
+                                    reserva: reservaRequest),
                           ),
                         );
                       },
@@ -117,6 +126,7 @@ class ReservasActivasCliente extends StatelessWidget {
     );
   }
 }
+
 class ReservaFinalizadaClienteScreen extends StatefulWidget {
   final Reserva reserva;
 
@@ -127,7 +137,8 @@ class ReservaFinalizadaClienteScreen extends StatefulWidget {
       _ReservaFinalizadaClienteScreenState();
 }
 
-class _ReservaFinalizadaClienteScreenState extends State<ReservaFinalizadaClienteScreen> {
+class _ReservaFinalizadaClienteScreenState
+    extends State<ReservaFinalizadaClienteScreen> {
   TextEditingController nombreParqueo = TextEditingController();
   TextEditingController pisoController = TextEditingController();
   TextEditingController filaController = TextEditingController();
@@ -146,12 +157,21 @@ class _ReservaFinalizadaClienteScreenState extends State<ReservaFinalizadaClient
   String typeVehicle = "";
   String urlImage = "";
 
+  String uniqueCode = '';
+
   bool calificacionDuenio = true;
 
   @override
   void initState() {
     super.initState();
     getFullData();
+    generateUniqueCode();
+  }
+
+  void generateUniqueCode() {
+    setState(() {
+      uniqueCode = '${widget.reserva.idParqueo}-${widget.reserva.idPlaza}';
+    });
   }
 
   Future<void> getFullData() async {
@@ -178,58 +198,123 @@ class _ReservaFinalizadaClienteScreenState extends State<ReservaFinalizadaClient
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Fecha: ${widget.reserva.date}',
-                style: const TextStyle(
-                    fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Fecha de llegada: ${widget.reserva.dateArrive}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Fecha de salida: ${widget.reserva.dateOut}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Modelo: ${widget.reserva.model}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Placa: ${widget.reserva.plate}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Estado: ${widget.reserva.status}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Total: ${widget.reserva.total}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Tipo de vehículo: ${widget.reserva.typeVehicle}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 16.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      //String id = widget.reserva.id;
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Volver'),
+              Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF1E3C72), Color(0xFF2A5298)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                   ),
-                ],
+                ),
+                child: Center(
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Fecha: ${widget.reserva.date}',
+                            style: const TextStyle(
+                                fontSize: 18.0, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Fecha de llegada: ${widget.reserva.dateArrive}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Fecha de salida: ${widget.reserva.dateOut}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Modelo: ${widget.reserva.model}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Placa: ${widget.reserva.plate}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Estado: ${widget.reserva.status}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Total: ${widget.reserva.total}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Tipo de vehículo: ${widget.reserva.typeVehicle}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          const SizedBox(height: 16.0),
+                          const Text(
+                            'Escanea el código QR para ver la reserva',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 20),
+                          QrImageView(
+                            data: uniqueCode,
+                            version: QrVersions.auto,
+                            size: 300.0,
+                            gapless: false,
+                            errorStateBuilder: (context, error) => const Center(
+                              child: Text(
+                                'Error al generar el QR',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            'Código: $uniqueCode',
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+
+                          //boton para ir a MenuClient
+
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MenuClient(),
+                                ),
+                              );
+                            },
+                            child: const Text('Volver al menú'),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  //String id = widget.reserva.id;
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Volver'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

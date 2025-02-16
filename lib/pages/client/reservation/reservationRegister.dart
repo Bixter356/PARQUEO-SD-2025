@@ -602,7 +602,7 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
 
   Future<void> agregarReserva({required Map<String, dynamic> datos}) async {
     await FirebaseFirestore.instance.collection(Collection.reservas).add(datos);
-    Map<String, dynamic> data = {'estado': 'pendiente'};
+    Map<String, dynamic> data = {'estado': 'noDisponible'};
     DocumentReference plazaRef = widget.dataSearch.idPlaza!;
     await plazaRef.update(data);
   }

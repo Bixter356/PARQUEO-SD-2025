@@ -68,7 +68,7 @@ class ReservasPendientesCliente extends StatelessWidget {
               typeVehicle: data['vehiculo']['tipo'],
               id: document.id,
               idDuenio: data['parqueo']['idDuenio'],
-              idPlaza: data['idPlaza'].toString(),
+              idPlaza: data['idPlaza'],
             );
           }).toList();
 

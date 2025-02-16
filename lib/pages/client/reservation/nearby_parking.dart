@@ -16,7 +16,7 @@ class SelectParkingScreen extends StatelessWidget {
         appBar: AppBar(
             title: const Text(
               'Parqueos Cercanos Disponibles',
-              style: TextStyle(color: Colors.white , fontSize: 18),
+              style: TextStyle(color: Colors.white),
             ),
           leading: IconButton(
           icon: const Icon(
@@ -26,11 +26,24 @@ class SelectParkingScreen extends StatelessWidget {
           iconSize: 30,
           onPressed: () => Navigator.pop(context),
         ),
-            backgroundColor: const Color(0xFF02335B)),
+        backgroundColor: const Color(0xFF02335B)),
         body: const PlazaListScreen(),
       ),
     );
   }
+}
+
+class ParkLanding {
+  bool automovil;
+  bool moto;
+  bool otro;
+  Map<String, dynamic> dataPark;
+
+  ParkLanding(
+      {required this.automovil,
+      required this.moto,
+      required this.otro,
+      required this.dataPark});
 }
 
 class PlazaListScreen extends StatefulWidget {
@@ -41,6 +54,53 @@ class PlazaListScreen extends StatefulWidget {
 }
 
 class PlazaListScreenState extends State<PlazaListScreen> {
+  List<ParkLanding> parkLanding = [];
+
+  Future<void> checkFreePlaces() async {
+    //obtener todos los parqueos
+    CollectionReference parkingCollection =
+        FirebaseFirestore.instance.collection('parqueo');
+    // iterar sobre cada parqueo para ver si tiene almenos una plaza libre de cada tipo. los parqueos tienen plazas
+    QuerySnapshot querySnapshot = await parkingCollection.get();
+    for (var doc in querySnapshot.docs) {
+      //obtener plazas
+      CollectionReference placesCollection =
+          parkingCollection.doc(doc.id).collection('plazas');
+
+      // iniciar boleanos como falsos
+      bool auto = false;
+      bool moto = false;
+      bool otro = false;
+
+      QuerySnapshot placesSnapshot = await placesCollection.get();
+      for (var placeDoc in placesSnapshot.docs) {
+        Map<String, dynamic> data = placeDoc.data() as Map<String, dynamic>;
+        if (data['estado'] == 'disponible') {
+          if (data['tipoVehiculo'] == 'Automovil') {
+            auto = true;
+          } else if (data['tipoVehiculotipo'] == 'Moto') {
+            moto = true;
+          } else if (data['tipoVehiculo'] == 'Otro') {
+            otro = true;
+          }
+        }
+      }
+      parkLanding.add(ParkLanding(
+          automovil: auto,
+          moto: moto,
+          otro: otro,
+          dataPark: doc.data() as Map<String, dynamic>));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkFreePlaces().then((_) {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +110,11 @@ class PlazaListScreenState extends State<PlazaListScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
+            );
+          }
+          if (parkLanding.isEmpty) {
+            return const Center(
+              child: Text('No hay parqueos disponibles'),
             );
           }
 
@@ -62,20 +127,21 @@ class PlazaListScreenState extends State<PlazaListScreen> {
               snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data() as Map<String, dynamic>;
             return Parqueo(
-                idParqueo: document.reference,
-                nombre: data['nombre'],
-                direccion: data['direccion'],
-                ubicacion: data['ubicacion'],
-                descripcion: data['descripcion'],
-                vehiculosPermitidos: data['vehiculosPermitidos'],
-                tarifaAutomovil: data['tarifaAutomovil'],
-                tarifaMoto: data['tarifaMoto'],
-                tarifaOtro: data['tarifaOtro'],
-                horaApertura: data['horaApertura'],
-                horaCierre: data['horaCierre'],
-                idDuenio: data['idDuenio'],
-                puntaje: data['puntaje'].toDouble(),
-                diasApertura: data['diasApertura'],);
+              idParqueo: document.reference,
+              nombre: data['nombre'],
+              direccion: data['direccion'],
+              ubicacion: data['ubicacion'],
+              descripcion: data['descripcion'],
+              vehiculosPermitidos: data['vehiculosPermitidos'],
+              tarifaAutomovil: data['tarifaAutomovil'],
+              tarifaMoto: data['tarifaMoto'],
+              tarifaOtro: data['tarifaOtro'],
+              horaApertura: data['horaApertura'],
+              horaCierre: data['horaCierre'],
+              idDuenio: data['idDuenio'],
+              puntaje: data['puntaje'].toDouble(),
+              diasApertura: data['diasApertura'],
+            );
           }).toList();
           return ListView.builder(
             itemCount: parqueos.length,
@@ -83,13 +149,14 @@ class PlazaListScreenState extends State<PlazaListScreen> {
               final parqueo = parqueos[index];
               return InkWell(
                 onTap: () {
-                  DataReservationSearch dataSearch = DataReservationSearch(idParqueo: parqueo.idParqueo);
+                  DataReservationSearch dataSearch =
+                      DataReservationSearch(idParqueo: parqueo.idParqueo);
                   // Implementa aquí la lógica para abrir la pantalla de edición.
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MostrarDatosParqueoScreen(dataSearch: dataSearch)
-                    ),
+                        builder: (context) =>
+                            MostrarDatosParqueoScreen(dataSearch: dataSearch)),
                   );
                 },
                 child: Card(
@@ -102,24 +169,28 @@ class PlazaListScreenState extends State<PlazaListScreen> {
                       style: const TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
-                    // subtitle: Text(
-                    //   parqueo.tieneCobertura
-                    //       ? 'Con Cobertura'
-                    //       : 'Sin Cobertura',
-                    //   style: const TextStyle(fontSize: 16.0),
-                    // ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.car_repair, color: Colors.blue),
-                      onPressed: () {
-                        DataReservationSearch dataSearch = DataReservationSearch(idParqueo: parqueo.idParqueo);
-                        // Implementa aquí la lógica para abrir la pantalla de edición.
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MostrarDatosParqueoScreen(dataSearch: dataSearch)
-                          ),
-                        );
-                      },
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.directions_car,
+                          color: parkLanding[index].automovil
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                        Icon(
+                          Icons.motorcycle,
+                          color: parkLanding[index].moto
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                        Icon(
+                          Icons.directions_bus,
+                          color: parkLanding[index].otro
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -130,18 +201,6 @@ class PlazaListScreenState extends State<PlazaListScreen> {
       ),
     );
   }
-
-  // Función para abrir detalles de la plaza
-  void abrirDetallesPlaza(Plaza plaza) {
-    // Implementa aquí la lógica para mostrar los detalles de la plaza.
-    // Puedes navegar a una nueva pantalla de detalles, por ejemplo.
-  }
-
-  // // Función para editar la plaza
-  // void editarPlaza(Plaza plaza) {
-  //   // Implementa aquí la lógica para editar la plaza.
-  //   // Puedes navegar a la pantalla de edición y pasar la plaza como argumento.
-  // }
 }
 
 Future<void> agregarDocumentoASubcoleccion(String idParqueo, String idPiso,

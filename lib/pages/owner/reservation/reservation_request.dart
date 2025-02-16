@@ -49,7 +49,6 @@ class ReservasPendientes extends StatelessWidget {
               apellidoCliente: data['cliente']['apellidos'],
               nombreParqueo: data['parqueo']['nombre'],
               nombrePlaza: data['parqueo']['plaza'],
-
               date: data['fecha'].toDate(),
               dateArrive: data['fechaLlegada'].toDate(),
               dateOut: data['fechaSalida'].toDate(),

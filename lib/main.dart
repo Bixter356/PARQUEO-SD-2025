@@ -11,9 +11,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  initialRoute = Routes.loginScreen;
+  //initialRoute = Routes.qrScan;
   //initialRoute = Routes.registerParking;
+  initialRoute = Routes.loginScreen;
   runApp(MyApp(router: AppRouter()));
+  //runApp(const QRViewExample());
 }
 
 class MyApp extends StatelessWidget {

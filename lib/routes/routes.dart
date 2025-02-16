@@ -22,5 +22,6 @@ class Routes {
   static const String mapClientScreen = "/mapClientScreen";
 
   static const String clientMenuScreen = "/clientMenuScreen";
+  static const String qrScan = "/qrScan";
 
 }
