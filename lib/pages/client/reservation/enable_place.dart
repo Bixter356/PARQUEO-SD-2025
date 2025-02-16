@@ -10,22 +10,24 @@ class SelectSpaceScreen extends StatelessWidget {
   const SelectSpaceScreen({super.key, required this.dataSearch});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        
-        appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back , color: Colors.white,),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+    return Scaffold(
+      appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
             ),
-            title: const Text('Plazas Disponibles' , style: TextStyle(color: Colors.white),),
-            backgroundColor: const Color(0xFF02335B)
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-        body: PlazaListScreen(
-          dataSearch: dataSearch,
-        ),
+          title: const Text(
+            'Plazas Disponibles',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: const Color(0xFF02335B)),
+      body: PlazaListScreen(
+        dataSearch: dataSearch,
       ),
     );
   }
@@ -63,7 +65,8 @@ class PlazaListScreenState extends State<PlazaListScreen> {
               idPlaza: document.reference,
               nombre: data['nombre'],
               estado: data['estado'],
-              tipo: data['tipoVehiculo'],);
+              tipo: data['tipoVehiculo'],
+            );
           }).toList();
 
           if (plazas.isEmpty) {
@@ -90,6 +93,7 @@ class PlazaListScreenState extends State<PlazaListScreen> {
             itemCount: plazas.length,
             itemBuilder: (context, index) {
               final plaza = plazas[index];
+
               return InkWell(
                 onTap: () {
                   DataReservationSearch dataSearch = widget.dataSearch;
@@ -315,17 +319,16 @@ Stream<List<Plaza>> getSpacesRealTime() {
 //   }
 // }
 Stream<QuerySnapshot> getSpaces(DataReservationSearch dataSearch) async* {
-
   final Query plazaQuery = dataSearch.idParqueo
-          .collection('plazas')
-          .where('estado', isEqualTo: 'disponible')
-          .where('tipoVehiculo', isEqualTo: dataSearch.tipoVehiculo);
+      .collection('plazas')
+      .where('estado', isEqualTo: 'disponible')
+      .where('tipoVehiculo', isEqualTo: dataSearch.tipoVehiculo);
 
-      final Stream<QuerySnapshot> plazaQueryStream = plazaQuery.snapshots();
+  final Stream<QuerySnapshot> plazaQueryStream = plazaQuery.snapshots();
 
-      await for (QuerySnapshot snapshot in plazaQueryStream) {
-        yield snapshot;
-      }
+  await for (QuerySnapshot snapshot in plazaQueryStream) {
+    yield snapshot;
+  }
 }
 
 Future<QuerySnapshot> getCollectionSnapshot(

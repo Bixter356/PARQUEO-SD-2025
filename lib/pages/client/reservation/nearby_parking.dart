@@ -15,18 +15,18 @@ class SelectParkingScreen extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
             title: const Text(
-              'Parqueos Cercanos Disponibles',
+              'Parqueos Cercanos',
               style: TextStyle(color: Colors.white),
             ),
-          leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          iconSize: 30,
-          onPressed: () => Navigator.pop(context),
-        ),
-        backgroundColor: const Color(0xFF02335B)),
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              iconSize: 30,
+              onPressed: () => Navigator.pop(context),
+            ),
+            backgroundColor: const Color(0xFF02335B)),
         body: const PlazaListScreen(),
       ),
     );
@@ -203,6 +203,18 @@ class PlazaListScreenState extends State<PlazaListScreen> {
   }
 }
 
+Stream<QuerySnapshot> getParking() {
+  try {
+    CollectionReference parkingCollection =
+        FirebaseFirestore.instance.collection('parqueo');
+    return parkingCollection
+        .snapshots(); // Devuelve un Stream que escucha cambios en la colección.
+  } catch (e) {
+    log('Error al obtener el Stream de parqueos: $e');
+    rethrow;
+  }
+}
+
 Future<void> agregarDocumentoASubcoleccion(String idParqueo, String idPiso,
     String idFila, Map<String, dynamic> datos) async {
   // Obtén una referencia a la colección principal, en este caso, 'parqueos'
@@ -292,18 +304,6 @@ Stream<QuerySnapshot> obtenerPlazasStream(
         .snapshots(); // Devuelve un Stream que escucha cambios en la colección.
   } catch (e) {
     log('Error al obtener el Stream de plazas: $e');
-    rethrow;
-  }
-}
-
-Stream<QuerySnapshot> getParking() {
-  try {
-    CollectionReference parkingCollection =
-        FirebaseFirestore.instance.collection('parqueo');
-    return parkingCollection
-        .snapshots(); // Devuelve un Stream que escucha cambios en la colección.
-  } catch (e) {
-    log('Error al obtener el Stream de parqueos: $e');
     rethrow;
   }
 }

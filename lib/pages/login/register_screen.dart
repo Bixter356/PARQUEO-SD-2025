@@ -35,15 +35,25 @@ class RegisterScreenState extends State<RegisterScreen> {
     //final double width = MediaQuery.of(context).size.width;
     //final double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 8, 68, 171),
+      backgroundColor: const Color.fromARGB(255, 3, 33, 84),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsetsDirectional.all(20),
+            // boton de regreso
+            Padding(
+              padding: const EdgeInsets.only(top: 10, left: 10),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
             ),
-
             Container(
               padding: const EdgeInsets.all(15),
               alignment: Alignment.center,
@@ -60,7 +70,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       const FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          'Regístrese para comenzar',
+                          'Registro de Usuario',
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -177,28 +187,25 @@ class RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const SizedBox(height: 20),
                       // Usamos un Row para colocar los RadioButtons en fila
-                    const SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       ElevatedButton(
                         onPressed: () async {
-                          if(widget.userType == 'Cliente'){
-                            
-                          }
-                          else if(widget.userType == 'Dueño'){
-
-                          }
+                          if (widget.userType == 'Cliente') {
+                          } else if (widget.userType == 'Dueño') {}
                           UserData userData = sendUserData(widget.userType);
-                                            // Acción cuando se presiona el botón
+                          // Acción cuando se presiona el botón
                           try {
-                            ProgressDialog.show(context, 'Registrando usuario...');
+                            ProgressDialog.show(
+                                context, 'Registrando usuario...');
                             await registerUser(userData, context);
 
                             // ignore: use_build_context_synchronously
                             ProgressDialog.hide(context);
                             if (!context.mounted) return;
-                              context.pushNamedAndRemoveUntil(
-                                Routes.loginScreen,
-                                predicate: (route) => false,
-                              );
+                            context.pushNamedAndRemoveUntil(
+                              Routes.loginScreen,
+                              predicate: (route) => false,
+                            );
                           } catch (e) {
                             // ignore: use_build_context_synchronously
                             Toast.show(context, e.toString());
@@ -212,8 +219,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 40,
                               vertical: 16), // Ajusta el tamaño del botón
-                          backgroundColor:
-                              const Color.fromARGB(255, 25, 47, 65), // Color de fondo del botón
+                          backgroundColor: const Color.fromARGB(
+                              255, 25, 47, 65), // Color de fondo del botón
                         ),
                         child: const Text(
                           'Registrarse', // Texto del botón
@@ -235,7 +242,7 @@ class RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  UserData sendUserData(String userType){
+  UserData sendUserData(String userType) {
     UserData userData = UserData(
         nombre: nombreController.text,
         apellidos: apellidosController.text,
@@ -275,7 +282,7 @@ Future<void> registerUser(UserData userData, BuildContext context) async {
         UsersCollection.tipo: userData.typeUser,
         UsersCollection.estado: 'habilitado',
         UsersCollection.puntaje: 5,
-        UsersCollection.sumaPuntos:5,
+        UsersCollection.sumaPuntos: 5,
         UsersCollection.cantidadResenias: 1,
         // Agrega otros campos de datos aquí
       });
@@ -308,7 +315,7 @@ Future<void> ownerRequestAccount(
       AccountRequestCollection.estado: 'pendiente',
       // Agrega otros campos de datos aquí
     });
-    
+
     if (!context.mounted) return;
     Toast.show(
         context, 'Se ha realizado la Solicitud\nSe le notificara al correo');

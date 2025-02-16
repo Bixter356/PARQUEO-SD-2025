@@ -9,10 +9,11 @@ class ReservasPendientes extends StatelessWidget {
 
   Stream<QuerySnapshot> getReservasStream() {
     return FirebaseFirestore.instance
-      .collection('reserva')
-      .where('parqueo.idDuenio', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .where('estado', isEqualTo: 'pendiente')
-      .snapshots();
+        .collection('reserva')
+        .where('parqueo.idDuenio',
+            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('estado', isEqualTo: 'pendiente')
+        .snapshots();
   }
 
   @override
@@ -20,9 +21,10 @@ class ReservasPendientes extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.white, 
+          color: Colors.white,
         ),
-        title: const Text('Reservas Pendientes' , style: TextStyle(color: Colors.white) ),
+        title: const Text('Reservas Pendientes',
+            style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF041657),
       ),
       body: StreamBuilder<QuerySnapshot>(

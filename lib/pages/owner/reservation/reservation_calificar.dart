@@ -3,23 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:app_3_27_4/models/to_use/reservation_request.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:app_3_27_4/services/temporal.dart';
-//import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 class ReservasFinalizadas extends StatelessWidget {
   const ReservasFinalizadas({super.key});
 
   Stream<QuerySnapshot> getReservasStream() {
-
-    //QuerySnapshot parqueos = FirebaseFirestore.instance.collection('parqueo').get() as QuerySnapshot;
-
     return FirebaseFirestore.instance
-      .collection('reserva')
-      .where('parqueo.idDuenio', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .where('estado', isEqualTo: 'finalizado')
-      .snapshots();
+        .collection('reserva')
+        .where('parqueo.idDuenio',
+            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('estado', isEqualTo: 'finalizado')
+        .snapshots();
   }
 
   @override
@@ -27,9 +24,10 @@ class ReservasFinalizadas extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.white, 
+          color: Colors.white,
         ),
-        title: const Text('Reservas Finalizadas', style: TextStyle(color: Colors.white)),
+        title: const Text('Reservas Finalizadas',
+            style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF041657),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -45,16 +43,9 @@ class ReservasFinalizadas extends StatelessWidget {
             return Text('Error: ${snapshot.error}');
           }
 
-          // Obtén la lista de plazas
           List<Reserva> reservas =
               snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
-            // DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.doc(data['idVehiculo']).get();
-            // Map<String, dynamic> vehiculoData = documentSnapshot.data() as Map<String, dynamic>;
-
-            // Aquí puedes realizar las operaciones necesarias con los datos del vehículo
-
             return Reserva(
               idCliente: data['cliente']['idCliente'],
               nombreCliente: data['cliente']['nombre'],
@@ -78,17 +69,14 @@ class ReservasFinalizadas extends StatelessWidget {
             itemBuilder: (context, index) {
               final reservaRequest = reservas[index];
               return InkWell(
-                onTap: () {
-                  // Implementa aquí la lógica que se realizará al hacer clic en el elemento.
-                  // Por ejemplo, puedes abrir una pantalla de detalles de la plaza.
-                },
+                onTap: () {},
                 child: Card(
                   elevation: 3.0,
                   margin: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
                   child: ListTile(
                     title: Text(
-                      '${reservaRequest.nombreParqueo} - ${reservaRequest.total}',
+                      '${reservaRequest.nombreParqueo} - ${reservaRequest.total} Bs',
                       style: const TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -99,7 +87,6 @@ class ReservasFinalizadas extends StatelessWidget {
                     trailing: IconButton(
                       icon: const Icon(Icons.read_more, color: Colors.blue),
                       onPressed: () {
-                        // Implementa aquí la lógica para abrir la pantalla de edición.
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -119,6 +106,7 @@ class ReservasFinalizadas extends StatelessWidget {
     );
   }
 }
+
 class ReservaFinalizadaScreen extends StatefulWidget {
   final Reserva reserva;
 
@@ -130,24 +118,6 @@ class ReservaFinalizadaScreen extends StatefulWidget {
 }
 
 class _ReservaFinalizadaScreenState extends State<ReservaFinalizadaScreen> {
-  TextEditingController nombreParqueo = TextEditingController();
-  TextEditingController pisoController = TextEditingController();
-  TextEditingController filaController = TextEditingController();
-  TextEditingController plazaController = TextEditingController();
-  TextEditingController placaController = TextEditingController();
-  TextEditingController marcaController = TextEditingController();
-  TextEditingController colorController = TextEditingController();
-  TextEditingController modeloController = TextEditingController();
-  TextEditingController estadoController = TextEditingController();
-  TextEditingController fechaInicioController = TextEditingController();
-  TextEditingController fechaFinController = TextEditingController();
-
-  DateTime? reservationDateIn, reservationDateOut;
-  bool radioValue = false;
-  List<bool> checkboxValues = [false, false, false];
-  String typeVehicle = "";
-  String urlImage = "";
-
   bool calificacionDuenio = true;
 
   @override
@@ -170,132 +140,159 @@ class _ReservaFinalizadaScreenState extends State<ReservaFinalizadaScreen> {
   @override
   Widget build(BuildContext context) {
     int number = 0;
+    DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reservas Finalizadas' , style: TextStyle(color: Colors.white),),
+        title: const Text(
+          'Reservas Finalizadas',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: const Color(0xFF02335B),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Fecha: ${widget.reserva.date}',
-                style: const TextStyle(
-                    fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Fecha de llegada: ${widget.reserva.dateArrive}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Fecha de salida: ${widget.reserva.dateOut}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Modelo: ${widget.reserva.model}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Placa: ${widget.reserva.plate}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Estado: ${widget.reserva.status}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Total: ${widget.reserva.total}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Tipo de vehículo: ${widget.reserva.typeVehicle}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 16.0),
-              if (!calificacionDuenio)
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemPadding:
-                            const EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) async {
-                          if (kDebugMode) {
-                            print(rating);
-                            number = rating.toInt();
-                          }
-                        },
+          child: Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ListTile(
+                    leading:
+                        const Icon(Icons.calendar_today, color: Colors.blue),
+                    title: Text(
+                      'Fecha: ${dateFormat.format(widget.reserva.date)}',
+                      style: const TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.access_time, color: Colors.green),
+                    title: Text(
+                      'Fecha de llegada: ${dateFormat.format(widget.reserva.dateArrive)}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.access_time, color: Colors.red),
+                    title: Text(
+                      'Fecha de salida: ${dateFormat.format(widget.reserva.dateOut)}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.directions_car, color: Colors.orange),
+                    title: Text(
+                      'Modelo: ${widget.reserva.model}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.confirmation_number,
+                        color: Colors.purple),
+                    title: Text(
+                      'Placa: ${widget.reserva.plate}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.info, color: Colors.teal),
+                    title: Text(
+                      'Estado: ${widget.reserva.status}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.attach_money, color: Colors.green),
+                    title: Text(
+                      'Total: ${widget.reserva.total}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.directions_car_filled,
+                        color: Colors.blueGrey),
+                    title: Text(
+                      'Tipo de vehículo: ${widget.reserva.typeVehicle}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  if (!calificacionDuenio)
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RatingBar.builder(
+                            initialRating: 3,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 5,
+                            itemPadding:
+                                const EdgeInsets.symmetric(horizontal: 4.0),
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (rating) async {
+                              if (kDebugMode) {
+                                print(rating);
+                                number = rating.toInt();
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: () async {
+                              if (kDebugMode) {
+                                print('Botón presionado');
+                                DocumentReference reservaRef = FirebaseFirestore
+                                    .instance
+                                    .collection('reserva')
+                                    .doc(widget.reserva.id);
+
+                                reservaRef.update({'calificacionDuenio': true});
+                                await updateItem(
+                                    number, widget.reserva.idCliente!);
+                                if (!context.mounted) return;
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: const Text('Guardar Calificación'),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                          height:
-                              20), // Añade un espacio entre la barra de calificación y el botón
+                    ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
                       ElevatedButton(
-                        onPressed: () async {
-                          // Aquí puedes agregar la lógica para guardar el rating
-                          if (kDebugMode) {
-                            print('Botón presionado');
-
-                            // Obtener y usar el usuario existente
-                            //Usuario usuario = await obtenerUsuario(FirebaseAuth.instance.currentUser!.uid); //Aquien se calificara
-
-                            // Actualizar el puntaje del usuario
-
-                            DocumentReference reservaRef = FirebaseFirestore
-                                .instance
-                                .collection('reserva')
-                                .doc(widget.reserva.id);
-
-                            reservaRef.update({'calificacionDuenio': true});
-                            await updateItem(number, widget.reserva.idCliente!);
-                            if(!context.mounted) return;
-                            Navigator.pop(context);
-                          }
+                        onPressed: () {
+                          Navigator.pop(context);
                         },
-                        child: const Text('Guardar Calificación'),
+                        child: const Text('Volver'),
                       ),
                     ],
                   ),
-                ),
-              const SizedBox(height: 16.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      //String id = widget.reserva.id;
-                      //obtener el documento de la coleccion reserva
-                      // DocumentReference reservaRef = FirebaseFirestore.instance
-                      //     .collection('reserva')
-                      //     .doc(id);
-                      // //actualizar el estado de la reserva
-                      // reservaRef.update({'estado': 'rechazado'});
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Volver'),
-                  ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

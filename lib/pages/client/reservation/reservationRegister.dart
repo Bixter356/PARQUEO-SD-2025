@@ -90,7 +90,8 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
       }
       estadoController.text = dataPlace['estado'];
       //urlImage = dataParking['url'];
-      urlImage = 'https://ultrahogares.com/wp-content/uploads/2020/02/parqueo.jpg';
+      urlImage =
+          'https://ultrahogares.com/wp-content/uploads/2020/02/parqueo.jpg';
 
       //instanciamos el id del Duenio
       widget.dataSearch.idDuenio = dataParking['idDuenio'];
@@ -121,10 +122,14 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
     return Scaffold(
       backgroundColor: Color(0xFF02335B),
       appBar: AppBar(
+        backgroundColor: const Color(0xFD02334B),
         centerTitle: true,
         title: const Text(
           'Detalles Reserva',
-          style: TextStyle(fontSize: 25 , color: Colors.white),
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+          ),
         ),
         leading: IconButton(
           icon: const Icon(
@@ -140,7 +145,7 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 35),
+              margin: const EdgeInsets.only(top: 1),
               child: Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(24),
@@ -150,15 +155,11 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
                   //   height: 190,
                   //   fit: BoxFit.cover,
                   // ),
-                  child: SizedBox(
-                    width: 10,
-                    height: 10,
-                  ),
                 ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 25),
+              margin: const EdgeInsets.only(top: 10),
               padding: const EdgeInsets.all(15),
               child: Card(
                 shape: RoundedRectangleBorder(

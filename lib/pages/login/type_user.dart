@@ -274,7 +274,6 @@ Future<void> checkFieldExists(String documentId) async {
     } else {
       // El campo 'correo' no existe en el documento.
       log('Debo reenviar al formulario para completar');
-      // Realiza otras acciones aquí.
     }
   } else {
     // El documento no existe.

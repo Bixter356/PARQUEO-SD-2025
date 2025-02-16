@@ -55,6 +55,7 @@ class LoginPage extends StatelessWidget {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +77,7 @@ class LoginPage extends StatelessWidget {
 
                 // welcome back, you've been missed!
                 Text(
-                  'Bienvenido a Project-Park!',
+                  'Bienvenido a LUH-PARKING!',
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 16,
@@ -146,7 +147,6 @@ class LoginPage extends StatelessWidget {
                           ),
                         );
                       } else if (user['tipo'] == "Dueño") {
-                        
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -160,7 +160,6 @@ class LoginPage extends StatelessWidget {
                             builder: (context) => const MenuAdmin(),
                           ),
                         );
-
                       }
                     } else {
                       if (!context.mounted) return;
@@ -293,8 +292,7 @@ class LoginPage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const MenuAdmin(),
+                                      builder: (context) => const MenuAdmin(),
                                     ),
                                   );
                                 }
@@ -327,10 +325,10 @@ class LoginPage extends StatelessWidget {
                             } else {
                               if (!context.mounted) return;
                               ProgressDialog.hide(context);
-                                context.pushNamedAndRemoveUntil(
-                                  Routes.requestType,
-                                  predicate: (route) => false,
-                                );
+                              context.pushNamedAndRemoveUntil(
+                                Routes.requestType,
+                                predicate: (route) => false,
+                              );
                               // Realiza acciones si el documento no existe.
                             }
                           } else {
@@ -365,29 +363,28 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Text(
-                    '¿No tiene Cuenta?',
-                    style: TextStyle(color: Colors.grey[700]),
-                  ),
-                  const SizedBox(width: 4),
-                  GestureDetector(
-                    onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                      builder: (context) => const TypeUser(),
+                    Text(
+                      '¿No tiene Cuenta?',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TypeUser(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Registrarse ahora',
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
                       ),
-                    );
-                    },
-                    child: const Text(
-                    'Registrarse ahora',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15
                     ),
-                    ),
-                  ),
                   ],
                 ),
               ],
@@ -397,5 +394,4 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-
 }

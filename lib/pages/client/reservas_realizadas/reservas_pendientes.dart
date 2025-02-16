@@ -2,21 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app_3_27_4/models/to_use/reservation_request.dart';
-
-//import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 class ReservasPendientesCliente extends StatelessWidget {
   const ReservasPendientesCliente({super.key});
 
   Stream<QuerySnapshot> getReservasStream() {
-
-    //QuerySnapshot parqueos = FirebaseFirestore.instance.collection('parqueo').get() as QuerySnapshot;
-
     return FirebaseFirestore.instance
-      .collection('reserva')
-      .where('idCliente', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .where('estado', isEqualTo: 'pendiente')
-      .snapshots();
+        .collection('reserva')
+        .where('idCliente', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('estado', isEqualTo: 'pendiente')
+        .snapshots();
   }
 
   @override
@@ -26,7 +22,10 @@ class ReservasPendientesCliente extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text('Reservas Pendientes' , style: TextStyle(color: Colors.white),),
+        title: const Text(
+          'Reservas Pendientes',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: const Color(0xFF02335B),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -42,15 +41,9 @@ class ReservasPendientesCliente extends StatelessWidget {
             return Text('Error: ${snapshot.error}');
           }
 
-          // Obtén la lista de plazas
           List<Reserva> reservas =
               snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
-            // DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.doc(data['idVehiculo']).get();
-            // Map<String, dynamic> vehiculoData = documentSnapshot.data() as Map<String, dynamic>;
-
-            // Aquí puedes realizar las operaciones necesarias con los datos del vehículo
 
             return Reserva(
               idCliente: data['cliente']['idCliente'],
@@ -68,7 +61,7 @@ class ReservasPendientesCliente extends StatelessWidget {
               typeVehicle: data['vehiculo']['tipo'],
               id: document.id,
               idDuenio: data['parqueo']['idDuenio'],
-              idPlaza: data['idPlaza'],
+              idPlaza: data['idPlaza'].id.toString(),
             );
           }).toList();
 
@@ -79,7 +72,13 @@ class ReservasPendientesCliente extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   // Implementa aquí la lógica que se realizará al hacer clic en el elemento.
-                  // Por ejemplo, puedes abrir una pantalla de detalles de la plaza.
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ReservaFinalizadaClienteScreen(
+                          reserva: reservaRequest),
+                    ),
+                  );
                 },
                 child: Card(
                   elevation: 3.0,
@@ -98,12 +97,12 @@ class ReservasPendientesCliente extends StatelessWidget {
                     trailing: IconButton(
                       icon: const Icon(Icons.edit, color: Colors.blue),
                       onPressed: () {
-                        // Implementa aquí la lógica para abrir la pantalla de edición.
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ReservaFinalizadaClienteScreen(
-                                reserva: reservaRequest),
+                            builder: (context) =>
+                                ReservaFinalizadaClienteScreen(
+                                    reserva: reservaRequest),
                           ),
                         );
                       },
@@ -118,6 +117,7 @@ class ReservasPendientesCliente extends StatelessWidget {
     );
   }
 }
+
 class ReservaFinalizadaClienteScreen extends StatefulWidget {
   final Reserva reserva;
 
@@ -128,127 +128,138 @@ class ReservaFinalizadaClienteScreen extends StatefulWidget {
       _ReservaFinalizadaClienteScreenState();
 }
 
-class _ReservaFinalizadaClienteScreenState extends State<ReservaFinalizadaClienteScreen> {
-  TextEditingController nombreParqueo = TextEditingController();
-  TextEditingController pisoController = TextEditingController();
-  TextEditingController filaController = TextEditingController();
-  TextEditingController plazaController = TextEditingController();
-  TextEditingController placaController = TextEditingController();
-  TextEditingController marcaController = TextEditingController();
-  TextEditingController colorController = TextEditingController();
-  TextEditingController modeloController = TextEditingController();
-  TextEditingController estadoController = TextEditingController();
-  TextEditingController fechaInicioController = TextEditingController();
-  TextEditingController fechaFinController = TextEditingController();
-
-  DateTime? reservationDateIn, reservationDateOut;
-  bool radioValue = false;
-  List<bool> checkboxValues = [false, false, false];
-  String typeVehicle = "";
-  String urlImage = "";
-
-  bool calificacionDuenio = true;
-
+class _ReservaFinalizadaClienteScreenState
+    extends State<ReservaFinalizadaClienteScreen> {
   @override
   void initState() {
     super.initState();
-    getFullData();
-  }
-
-  Future<void> getFullData() async {
-    DocumentSnapshot reservaSnapshot = await FirebaseFirestore.instance
-        .collection('reserva')
-        .doc(widget.reserva.id)
-        .get();
-    Map<String, dynamic> data = reservaSnapshot.data() as Map<String, dynamic>;
-    setState(() {
-      calificacionDuenio = data['calificacionCliente'];
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reserva Pendiente'),
+        title: const Text('Reserva Pendiente',
+            style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFF02335B),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Fecha: ${widget.reserva.date}',
-                style: const TextStyle(
-                    fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Fecha de llegada: ${widget.reserva.dateArrive}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Fecha de salida: ${widget.reserva.dateOut}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Modelo: ${widget.reserva.model}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Placa: ${widget.reserva.plate}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Estado: ${widget.reserva.status}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Total: ${widget.reserva.total}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Tipo de vehículo: ${widget.reserva.typeVehicle}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 16.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Volver'),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.calendar_today, color: Colors.blue),
+                    title: Text(
+                      'Fecha: ${dateFormat.format(widget.reserva.date)}',
+                      style: const TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      String id = widget.reserva.id;
-                      //obtener el documento de la coleccion reserva
-                      DocumentReference reservaRef = FirebaseFirestore.instance
-                          .collection('reserva')
-                          .doc(id);
-                      //actualizar el estado de la reserva
-                      reservaRef.update({'estado': 'cancelado'});
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.access_time, color: Colors.green),
+                    title: Text(
+                      'Fecha de llegada: ${dateFormat.format(widget.reserva.dateArrive)}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.access_time, color: Colors.red),
+                    title: Text(
+                      'Fecha de salida: ${dateFormat.format(widget.reserva.dateOut)}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.directions_car, color: Colors.orange),
+                    title: Text(
+                      'Modelo: ${widget.reserva.model}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.confirmation_number,
+                        color: Colors.purple),
+                    title: Text(
+                      'Placa: ${widget.reserva.plate}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.info, color: Colors.teal),
+                    title: Text(
+                      'Estado: ${widget.reserva.status}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.attach_money, color: Colors.green),
+                    title: Text(
+                      'Total: ${widget.reserva.total}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.directions_car_filled,
+                        color: Colors.blueGrey),
+                    title: Text(
+                      'Tipo de vehículo: ${widget.reserva.typeVehicle}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Volver'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          String id = widget.reserva.id;
+                          DocumentReference reservaRef = FirebaseFirestore
+                              .instance
+                              .collection('reserva')
+                              .doc(id);
+                          reservaRef.update({'estado': 'cancelado'});
 
-                      //actualizar el estado de la plaza //No se si falla o no
-                      DocumentReference plazaRef = FirebaseFirestore.instance.doc(widget.reserva.idPlaza!);
-                      plazaRef.update({'estado': 'disponible'});
+                          DocumentReference plazaRef = FirebaseFirestore
+                              .instance
+                              .doc(widget.reserva.idPlaza!);
+                          plazaRef.update({'estado': 'disponible'});
 
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Cancelar Reserva'),
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Cancelar Reserva'),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

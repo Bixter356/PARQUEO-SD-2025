@@ -157,7 +157,6 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
         firstDate: DateTime.now(),
         lastDate: DateTime.now().add(const Duration(days: 20)));
     if (pickedDate != null) {
-
       // ignore: use_build_context_synchronously
       // revisar si el contexto esta montado
       if (!context.mounted) return;
@@ -298,8 +297,7 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
         centerTitle: true,
         toolbarHeight: 70,
         titleTextStyle: const TextStyle(
-          fontSize: 25, color: Color.fromARGB(255, 7, 17, 128)
-        ),
+            fontSize: 25, color: Color.fromARGB(255, 7, 17, 128)),
         title: const Text(
           'Reserva',
           style: TextStyle(color: Colors.white),
@@ -556,7 +554,7 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                           'Su vehículo cumple perfectamente con las dimensiones requeridas para el tipo de vehículo seleccionado.',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 15,
                               backgroundColor:
                                   Color.fromRGBO(9, 180, 29, 0.949)),
                         ),
@@ -566,7 +564,7 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                           'Su vehículo no cumple con las dimensiones requeridas para el tipo de vehículo seleccionado.',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 15,
                               backgroundColor:
                                   Color.fromRGBO(221, 35, 2, 0.951)),
                         ),
@@ -594,17 +592,25 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                     style: TextStyle(
                       fontFamily: 'Urbanist',
                       fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 10),
                   const Padding(
                     padding: EdgeInsets.only(top: 20, left: 10),
-                    child: Text(
-                      'Autos',
-                      style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        fontSize: 20,
-                      ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.directions_car, color: Colors.blue),
+                        SizedBox(width: 10),
+                        Text(
+                          'Autos',
+                          style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -615,22 +621,32 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                           controller: tarifaAutomovilController,
                           readOnly: true,
                           decoration: const InputDecoration(
-                            // Ajusta estos valores según tus necesidades
                             border: InputBorder.none,
+                          ),
+                          style: const TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 18,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 20),
                   const Padding(
                     padding: EdgeInsets.only(top: 20, left: 10),
-                    child: Text(
-                      'Motos',
-                      style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        fontSize: 20,
-                      ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.motorcycle, color: Colors.orange),
+                        SizedBox(width: 10),
+                        Text(
+                          'Motos',
+                          style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -641,22 +657,32 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                           controller: tarifaMotoController,
                           readOnly: true,
                           decoration: const InputDecoration(
-                            // Ajusta estos valores según tus necesidades
                             border: InputBorder.none,
+                          ),
+                          style: const TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 18,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 20),
                   const Padding(
                     padding: EdgeInsets.only(top: 20, left: 10),
-                    child: Text(
-                      'Otros',
-                      style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        fontSize: 20,
-                      ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.directions_bus, color: Colors.green),
+                        SizedBox(width: 10),
+                        Text(
+                          'Otros',
+                          style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -667,8 +693,11 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                           controller: tarifaOtrosController,
                           readOnly: true,
                           decoration: const InputDecoration(
-                            // Ajusta estos valores según tus necesidades
                             border: InputBorder.none,
+                          ),
+                          style: const TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 18,
                           ),
                         ),
                       ),
@@ -788,53 +817,116 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromARGB(220, 217, 217, 217),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Cupones : 0",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontFamily: 'Urbanist',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 20, left: 10),
+                    child: Row(
+                      children: [
+                        Icon(Icons.directions_car, color: Colors.blue),
+                        SizedBox(width: 10),
+                        Text(
+                          'Usted tiene 0 cupones',
+                          style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: tarifaAutomovilController,
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          style: const TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
             const SizedBox(height: 30),
 
             //-------------------------------------------------------------------------------------------
-            ElevatedButton(
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                  const EdgeInsets.only(
-                      left: 80, right: 80, top: 20, bottom: 20),
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  valiAuto
-                      ? Colors.red[500]!
-                      : Colors
-                          .grey, // cambia el color del botón según el estado del booleano
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+            Center(
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+                    const EdgeInsets.only(
+                        left: 80, right: 80, top: 20, bottom: 20),
+                  ),
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                    valiAuto
+                        ? Colors.red[500]!
+                        : const Color.fromARGB(255, 51, 185,
+                            14), // cambia el color del botón según el estado del booleano
+                  ),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                   ),
                 ),
+
+                onPressed: valiAuto
+                    ? () async {
+                        // código para ejecutar cuando el botón está habilitado
+                        DataReservationSearch dataSearch =
+                            DataReservationSearch(
+                          idParqueo: widget.dataSearch.idParqueo,
+                          fechaInicio: Timestamp.fromDate(selectedDate[0]!),
+                          fechaFin: Timestamp.fromDate(selectedDate[1]!),
+                          tipoVehiculo: typeVehicle,
+                          total: getTotal(),
+                          idVehiculo: _selectedVehicle,
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SelectSpaceScreen(dataSearch: dataSearch),
+                          ),
+                        );
+                      }
+                    : null,
+
+                child: const Text(
+                  'Buscar',
+                  style: TextStyle(fontSize: 20),
+                ), // establece null cuando el botón está deshabilitado
               ),
-
-              onPressed: valiAuto
-                  ? () async {
-                      // código para ejecutar cuando el botón está habilitado
-                      DataReservationSearch dataSearch = DataReservationSearch(
-                        idParqueo: widget.dataSearch.idParqueo,
-                        fechaInicio: Timestamp.fromDate(selectedDate[0]!),
-                        fechaFin: Timestamp.fromDate(selectedDate[1]!),
-                        tipoVehiculo: typeVehicle,
-                        total: getTotal(),
-                        idVehiculo: _selectedVehicle,
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              SelectSpaceScreen(dataSearch: dataSearch),
-                        ),
-                      );
-                    }
-                  : null,
-
-              child: const Text(
-                'Buscar',
-                style: TextStyle(fontSize: 20),
-              ), // establece null cuando el botón está deshabilitado
             ),
           ],
         ),

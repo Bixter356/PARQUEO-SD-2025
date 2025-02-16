@@ -2,16 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app_3_27_4/models/to_use/reservation_request.dart';
+import 'package:intl/intl.dart';
 
 class ReservasActivas extends StatelessWidget {
   const ReservasActivas({super.key});
 
   Stream<QuerySnapshot> getReservasStream() {
     return FirebaseFirestore.instance
-      .collection('reserva')
-      .where('parqueo.idDuenio', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .where('estado', isEqualTo: 'activo')
-      .snapshots();
+        .collection('reserva')
+        .where('parqueo.idDuenio',
+            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('estado', isEqualTo: 'activo')
+        .snapshots();
   }
 
   @override
@@ -19,9 +21,10 @@ class ReservasActivas extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.white, 
+          color: Colors.white,
         ),
-        title: const Text('Reservas Activas', style: TextStyle(color: Colors.white)),
+        title: const Text('Reservas Activas',
+            style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF041657),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -37,15 +40,9 @@ class ReservasActivas extends StatelessWidget {
             return Text('Error: ${snapshot.error}');
           }
 
-          // Obtén la lista de plazas
           List<Reserva> reservas =
               snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
-            // DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.doc(data['idVehiculo']).get();
-            // Map<String, dynamic> vehiculoData = documentSnapshot.data() as Map<String, dynamic>;
-
-            // Aquí puedes realizar las operaciones necesarias con los datos del vehículo
 
             return Reserva(
               nombreCliente: data['cliente']['nombre'],
@@ -70,10 +67,7 @@ class ReservasActivas extends StatelessWidget {
             itemBuilder: (context, index) {
               final reservaRequest = reservas[index];
               return InkWell(
-                onTap: () {
-                  // Implementa aquí la lógica que se realizará al hacer clic en el elemento.
-                  // Por ejemplo, puedes abrir una pantalla de detalles de la plaza.
-                },
+                onTap: () {},
                 child: Card(
                   elevation: 3.0,
                   margin: const EdgeInsets.symmetric(
@@ -91,7 +85,6 @@ class ReservasActivas extends StatelessWidget {
                     trailing: IconButton(
                       icon: const Icon(Icons.edit, color: Colors.blue),
                       onPressed: () {
-                        // Implementa aquí la lógica para abrir la pantalla de edición.
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -112,137 +105,158 @@ class ReservasActivas extends StatelessWidget {
   }
 }
 
-class ReservaActivaScreen extends StatefulWidget {
+class ReservaActivaScreen extends StatelessWidget {
   final Reserva reserva;
 
   const ReservaActivaScreen({super.key, required this.reserva});
 
   @override
-  State<ReservaActivaScreen> createState() => _ReservaActivaScreenState();
-}
-
-class _ReservaActivaScreenState extends State<ReservaActivaScreen> {
-  TextEditingController nombreParqueo = TextEditingController();
-  TextEditingController pisoController = TextEditingController();
-  TextEditingController filaController = TextEditingController();
-  TextEditingController plazaController = TextEditingController();
-  TextEditingController placaController = TextEditingController();
-  TextEditingController marcaController = TextEditingController();
-  TextEditingController colorController = TextEditingController();
-  TextEditingController modeloController = TextEditingController();
-  TextEditingController estadoController = TextEditingController();
-  TextEditingController fechaInicioController = TextEditingController();
-  TextEditingController fechaFinController = TextEditingController();
-
-  DateTime? reservationDateIn, reservationDateOut;
-  bool radioValue = false;
-  List<bool> checkboxValues = [false, false, false];
-  String typeVehicle = "";
-  String urlImage = "";
-
-  @override
-  void initState() {
-    super.initState();
-    getFullData();
-  }
-
-  Future<void> getFullData() async {}
-
-  @override
   Widget build(BuildContext context) {
+    TextEditingController totalController =
+        TextEditingController(text: reserva.total.toString());
+    DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reservas Activas' , style: TextStyle(color: Colors.white),),
+        title: const Text('Reservas Activas',
+            style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF02335B),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Fecha: ${widget.reserva.date}',
-                style: const TextStyle(
-                    fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Fecha de llegada: ${widget.reserva.dateArrive}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Fecha de salida: ${widget.reserva.dateOut}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Modelo: ${widget.reserva.model}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Placa: ${widget.reserva.plate}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Estado: ${widget.reserva.status}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Total: ${widget.reserva.total}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Tipo de vehículo: ${widget.reserva.typeVehicle}',
-                style: const TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 16.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      String id = widget.reserva.id;
-                      //obtener el documento de la coleccion reserva
-                      DocumentReference reservaRef = FirebaseFirestore.instance
-                          .collection('reserva')
-                          .doc(id);
-                      //actualizar el estado de la reserva
-                      reservaRef.update({'estado': 'finalizado'});
-
-                      //actualizar el estado de la plaza //No se si falla o no
-                      DocumentReference plazaRef = FirebaseFirestore.instance.doc(widget.reserva.idPlaza!);
-                      plazaRef.update({'estado': 'disponible'});
-
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Finalizar'),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.calendar_today, color: Colors.blue),
+                    title: Text(
+                      'Fecha: ${dateFormat.format(reserva.date)}',
+                      style: const TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      String id = widget.reserva.id;
-                      //obtener el documento de la coleccion reserva
-                      DocumentReference reservaRef = FirebaseFirestore.instance
-                          .collection('reserva')
-                          .doc(id);
-                      //actualizar el estado de la reserva
-                      reservaRef.update({'estado': 'rechazado'});
-
-                      //actualizar el estado de la plaza //No se si falla o no
-                      DocumentReference plazaRef = FirebaseFirestore.instance.doc(widget.reserva.idPlaza!);
-                      plazaRef.update({'estado': 'disponible'});
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Caducar'),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.access_time, color: Colors.green),
+                    title: Text(
+                      'Fecha de llegada: ${dateFormat.format(reserva.dateArrive)}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.access_time, color: Colors.red),
+                    title: Text(
+                      'Fecha de salida: ${dateFormat.format(reserva.dateOut)}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.directions_car, color: Colors.orange),
+                    title: Text(
+                      'Modelo: ${reserva.model}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.confirmation_number,
+                        color: Colors.purple),
+                    title: Text(
+                      'Placa: ${reserva.plate}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.info, color: Colors.teal),
+                    title: Text(
+                      'Estado: ${reserva.status}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.attach_money, color: Colors.green),
+                    title: Text(
+                      'Total: ${reserva.total}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.directions_car_filled,
+                        color: Colors.blueGrey),
+                    title: Text(
+                      'Tipo de vehículo: ${reserva.typeVehicle}',
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          String id = reserva.id;
+                          DocumentReference reservaRef = FirebaseFirestore
+                              .instance
+                              .collection('reserva')
+                              .doc(id);
+                          reservaRef.update({
+                            'estado': 'finalizado',
+                            'total': double.parse(totalController.text)
+                          });
+                          DocumentReference plazaRef =
+                              FirebaseFirestore.instance.doc(reserva.idPlaza!);
+                          plazaRef.update({'estado': 'disponible'});
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.check, color: Colors.green),
+                        label: const Text('Finalizar'),
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.green,
+                            elevation: 4.0,
+                            shadowColor: Colors.green),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          String id = reserva.id;
+                          DocumentReference reservaRef = FirebaseFirestore
+                              .instance
+                              .collection('reserva')
+                              .doc(id);
+                          reservaRef.update({'estado': 'rechazado'});
+                          DocumentReference plazaRef =
+                              FirebaseFirestore.instance.doc(reserva.idPlaza!);
+                          plazaRef.update({'estado': 'disponible'});
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.close, color: Colors.red),
+                        label: const Text('Caducar'),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.red,
+                          elevation: 4.0,
+                          shadowColor: Colors.red,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

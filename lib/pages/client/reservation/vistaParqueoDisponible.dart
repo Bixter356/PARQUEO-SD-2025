@@ -21,9 +21,11 @@ class ParqueoDisponibleListScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Parqueos disponibles en tu zona' , style: TextStyle(color: Colors.white),),
-        backgroundColor: const Color(0xFF02335B)
-      ),
+          title: const Text(
+            'Parqueos disponibles en tu zona',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: const Color(0xFF02335B)),
       body: StreamBuilder(
         stream: obtenerParqueosStream(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -165,8 +167,6 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
       if (plazaDoc.exists) {
         Map<String, dynamic> data = plazaDoc.data() as Map<String, dynamic>;
 
-
-        
         // DocumentSnapshot<Map<String, dynamic>> ownerDoc = FirebaseFirestore.instance
         //     .collection('usuario')
         //     .doc(data['idDuenio'])
@@ -236,7 +236,8 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
         backgroundColor: const Color(0xFF02335B),
         title: Text(
           nombreParqueoController.text,
-          style: const TextStyle(fontWeight: FontWeight.bold , color: Colors.white),
+          style:
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         centerTitle: true,
       ),
@@ -263,7 +264,7 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
                 ),
               ),
               const SizedBox(height: 40),
-                const Text(
+              const Text(
                 'Parqueo Interno',
                 style: TextStyle(
                   fontSize: 24,
@@ -285,7 +286,7 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: const Color.fromARGB(255, 158, 195, 213),
+                  color: const Color.fromARGB(255, 84, 163, 243),
                 ),
                 child: Column(
                   children: [
@@ -694,12 +695,6 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
     );
   }
 }
-
-
-
-
-
-
 
 // class InterfazLectura extends StatelessWidget {
 //   final int calificacion;
