@@ -45,14 +45,13 @@ class ReservasPendientes extends StatelessWidget {
               apellidoCliente: data['cliente']['apellidos'],
               nombreParqueo: data['parqueo']['nombre'],
               nombrePlaza: data['parqueo']['plaza'],
-
               date: data['fecha'].toDate(),
               dateArrive: data['fechaLlegada'].toDate(),
               dateOut: data['fechaSalida'].toDate(),
               model: data['vehiculo']['marcaVehiculo'],
               plate: data['vehiculo']['placaVehiculo'],
               status: data['estado'],
-              total: data['total'],
+              total: data['total'].toDouble(),
               typeVehicle: data['vehiculo']['tipo'],
               id: document.id,
             );
