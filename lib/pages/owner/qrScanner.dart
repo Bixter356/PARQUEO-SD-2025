@@ -1,6 +1,7 @@
 import 'package:app_3_27_4/pages/owner/home_owner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 
 class QRScannerPage extends StatefulWidget {
   const QRScannerPage({super.key});
@@ -25,11 +26,12 @@ class _QRScannerPageState extends State<QRScannerPage> {
 
     controller.scannedDataStream.listen((scanData) {
       if (mounted && qrCodeValue == null) {
-        controller.pauseCamera(); // Pausa la cámara después de detectar un QR
+        controller.pauseCamera(); 
         qrCodeValue = scanData.code ?? "Error al escanear";
-        print("QR Escaneado: $qrCodeValue"); // Imprimir en consola
+        print("QR Escaneado: $qrCodeValue");
 
         _showQRDialog(qrCodeValue!);
+        _updatePlazaStatus(qrCodeValue!); 
       }
     });
   }
@@ -37,19 +39,19 @@ class _QRScannerPageState extends State<QRScannerPage> {
   void _showQRDialog(String qrData) {
     showDialog(
       context: context,
-      barrierDismissible: false, // Evita cerrar tocando fuera del dialog
+      barrierDismissible: false, 
       builder: (context) {
         return AlertDialog(
           title: const Text("QR escaneado correctamente"),
-          content: Text("Código: $qrData"),
+          //content: Text("Código: $qrData"),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Cierra el diálogo
+                Navigator.of(context).pop(); 
                 setState(() {
-                  qrCodeValue = null; // Restablece el valor del código QR
+                  qrCodeValue = null; 
                 });
-                controller?.resumeCamera(); // Reinicia la cámara para escanear de nuevo
+                controller?.resumeCamera();
               },
               child: const Text("OK"),
             ),
@@ -57,6 +59,29 @@ class _QRScannerPageState extends State<QRScannerPage> {
         );
       },
     );
+  }
+
+  Future<void> _updatePlazaStatus(String qrData) async {
+    try {
+      
+      List<String> ids = qrData.split('-');
+      if (ids.length == 2) {
+        String parqueoId = ids[0];  
+        String plazaId = ids[1];    
+
+        FirebaseFirestore firestore = FirebaseFirestore.instance;
+        DocumentReference parqueoRef = firestore.collection('parqueo').doc(parqueoId);
+        DocumentReference plazaRef = parqueoRef.collection('plazas').doc(plazaId);
+
+        await plazaRef.update({'estado': 'noDisponible'});
+
+        print('Estado actualizado a noDisponible para la plaza con ID: $plazaId');
+      } else {
+        print('QR escaneado no contiene los dos ID esperados.');
+      }
+    } catch (e) {
+      print('Error al actualizar el estado de la plaza: $e');
+    }
   }
 
   @override
@@ -80,7 +105,6 @@ class _QRScannerPageState extends State<QRScannerPage> {
   }
 }
 
-/// Superposición visual para el escáner
 class QRScannerOverlayPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
