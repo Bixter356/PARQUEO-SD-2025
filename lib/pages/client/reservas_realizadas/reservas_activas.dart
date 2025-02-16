@@ -282,6 +282,17 @@ class _ReservaFinalizadaClienteScreenState
 
                           //boton para ir a MenuClient
 
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MenuClient(),
+                                ),
+                              );
+                            },
+                            child: const Text('Volver al menú'),
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [

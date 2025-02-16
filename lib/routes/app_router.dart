@@ -1,3 +1,4 @@
+import 'package:app_3_27_4/pages/qr_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:app_3_27_4/pages/admin/accounts_request.dart';
 import 'package:app_3_27_4/pages/client/home_client_page.dart';
@@ -108,6 +109,11 @@ class AppRouter {
       case Routes.mapOwnerScreen:
         return MaterialPageRoute(
           builder: (_) => const MapOwner(),
+        );
+
+      case Routes.qrScan:
+        return MaterialPageRoute(
+          builder: (_) => const QRViewExample(),
         );
     }
     return null;
