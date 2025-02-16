@@ -1,9 +1,11 @@
+import 'package:app_3_27_4/pages/owner/qrScanner.dart';
 import 'package:flutter/material.dart';
 import 'package:app_3_27_4/pages/owner/chat_owner/home_page.dart';
 import 'package:app_3_27_4/pages/owner/home_owner_screen.dart';
 import 'package:app_3_27_4/pages/owner/reservation/reservation_calificar.dart';
 import 'package:app_3_27_4/pages/owner/reservation/reservation_request.dart';
 import 'package:app_3_27_4/pages/profile.dart';
+
 
 class MenuOwner extends StatefulWidget {
   const MenuOwner({super.key});
@@ -21,6 +23,7 @@ class _MenuOwnerState extends State<MenuOwner> {
     const ReservasFinalizadas(),
     const HomeChatOwnerScreen(),
     const ProfilePage(),
+    const QRScannerPage(),
   ];
 
   @override
@@ -38,7 +41,8 @@ class _MenuOwnerState extends State<MenuOwner> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.date_range), label: 'Finalizadas'),
             BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil')
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+            BottomNavigationBarItem(icon: Icon(Icons.qr_code), label: 'Escanear'),
           ]),
     );
   }
