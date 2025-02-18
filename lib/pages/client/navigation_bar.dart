@@ -20,7 +20,7 @@ class _MenuClientState extends State<MenuClient> {
     //const TicketsList(),
     const ReservasFinalizadasCliente(),
     const VehicleScreen(),
-    const HomeChatClientScreen(),
+    //const HomeChatClientScreen(),
     //const ProfilePage(),
     const ProfilePage(),
   ];
@@ -28,21 +28,22 @@ class _MenuClientState extends State<MenuClient> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: pages[selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            selectedItemColor: Colors.blue,
-            unselectedItemColor: Colors.black,
-            onTap: (index) => setState(() => selectedIndex = index),
-            currentIndex: selectedIndex,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_today_rounded), label: 'Reservas Finalizadas'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.car_crash), label: 'Vehiculos'),
-              BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil')
-            ]),
-      );
+      body: pages[selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.black,
+          onTap: (index) => setState(() => selectedIndex = index),
+          currentIndex: selectedIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.calendar_today_rounded),
+                label: 'Reservas Finalizadas'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.car_crash), label: 'Vehiculos'),
+            //BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil')
+          ]),
+    );
   }
 }

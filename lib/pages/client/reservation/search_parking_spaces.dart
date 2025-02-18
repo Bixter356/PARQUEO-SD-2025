@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:app_3_27_4/models/to_use/parking.dart';
@@ -24,6 +25,8 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
   TextEditingController tarifaOtrosController = TextEditingController();
   TextEditingController totalController = TextEditingController();
 
+  TextEditingController cuponesController = TextEditingController();
+
   List<bool> vehiclesAllowed = [false, false, false];
   List<double> tarifaAutomovil = [0.0, 0.0];
   List<double> tarifaMoto = [0.0, 0.0];
@@ -40,7 +43,8 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
   DateTime endDate = DateTime.now();
 
   String urlImage = "";
-
+  int cantidadCupones = 0;
+  int cantidadCuponesUsados = 0;
   List<DateTime?> selectedDate = [null, null];
   List<TimeOfDay?> selectedTime = [null, null];
 
@@ -55,7 +59,10 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
   @override
   void initState() {
     super.initState();
-    loadDataParqueo();
+
+    loadDataParqueo().then((_) {
+      setState(() {});
+    });
   }
 
   Future<void> loadDataParqueo() async {
@@ -70,6 +77,17 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
       DocumentSnapshot parqueoDoc = await widget.dataSearch.idParqueo.get();
 
       Map<String, dynamic> data = parqueoDoc.data() as Map<String, dynamic>;
+
+      // buscar en la subcoleccion de cupones si un documento tiene el campo de idParqueo igual a widget.dataSearch.idParqueo del usuario actual
+
+      QuerySnapshot<Map<String, dynamic>> cupones = await FirebaseFirestore
+          .instance
+          .collection('usuario')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cupones')
+          .where('idParqueo', isEqualTo: widget.dataSearch.idParqueo.id)
+          .get();
+
       setState(() {
         radioValue = data['tieneCobertura'];
         vehiclesAllowed[0] = data['vehiculosPermitidos']['Motos'];
@@ -113,6 +131,15 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
         dimensiones['otroLargo'] = data['dimensiones']['otroLargo'];
         //------------------------------------------------------------------------------------
         //
+        print("Controoool");
+        // si la consulta devuelve documentos, entonces se asigna la cantidad de cupones a la variable cantidadCupones
+        if (cupones.docs.isNotEmpty) {
+          print(cupones.docs[0].data()['Cantidad']);
+          //tomar el primer documento de la consulta, y asignar el valor del campo cantidad a la variable cantidadCupones
+          cantidadCupones = cupones.docs[0].data()['Cantidad'];
+
+          cuponesController.text = 'Usted tiene $cantidadCupones cupones';
+        }
       });
     } catch (e) {
       if (!context.mounted) return;
@@ -828,24 +855,28 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Cupones : 0",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontFamily: 'Urbanist',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  TextField(
+                    controller: cuponesController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        hintText: 'Usted tiene $cantidadCupones cupones',
+                        hintStyle: const TextStyle(
+                          fontFamily: 'Urbanist',
+                          fontSize: 18,
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFFE8ECF4),
+                        border: InputBorder.none),
                   ),
                   const SizedBox(height: 10),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 20, left: 10),
                     child: Row(
                       children: [
                         Icon(Icons.directions_car, color: Colors.blue),
                         SizedBox(width: 10),
                         Text(
-                          'Usted tiene 0 cupones',
+                          'Usted tiene $cantidadCupones cupones',
                           style: TextStyle(
                             fontFamily: 'Urbanist',
                             fontSize: 20,
@@ -856,23 +887,82 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: tarifaAutomovilController,
-                          readOnly: true,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                          ),
-                          style: const TextStyle(
-                            fontFamily: 'Urbanist',
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ],
+                  // texto para decir que puede usar 5 cupones para descontar el precio una hora
+                  const Text(
+                    'Puede usar 5 cupones para descontar el precio de una hora',
+                    style: TextStyle(
+                      fontFamily: 'Urbanist',
+                      fontSize: 18,
+                    ),
                   ),
+                  // Agregar un botón para usar los cupones de 5 en 5, hasta que se acaben, y que se descuente el precio de una hora
+                  ElevatedButton(
+                    onPressed: () {
+                      // Si la cantidad de cupones es mayor o igual a 5
+                      if (cantidadCupones >= 5) {
+
+                        //validar que el total no pueda ser negativo, tambien que el total sea mayor a la tarifa del vehiculo seleccionado (typeVehicle)
+                        switch (typeVehicle) {
+                          case 'Automovil':
+                            if (getTotal() - tarifaAutomovil[0] < 0) {
+                              Toast.show(context, 'No puede usar más cupones');
+                              return;
+                            }
+                            break;
+                          case 'Moto':
+                            if (getTotal() - tarifaMoto[0] < 0) {
+                              Toast.show(context, 'No puede usar más cupones');
+                              return;
+                            }
+                            break;
+                          case 'Otro':
+                            if (getTotal() - tarifaOtro[0] < 0) {
+                              Toast.show(context, 'No puede usar más cupones');
+                              return;
+                            }
+                            break;
+                        }
+
+
+                        // Restar 5 a la cantidad de cupones
+                        cantidadCupones -= 5;
+                        cantidadCuponesUsados += 5;
+                        // Actualizar el texto del controlador de cupones
+                        cuponesController.text = 'Usted tiene $cantidadCupones cupones';
+                        // Calcular el total con el descuento de 5 cupones
+                        double total = getTotal() - tarifaAutomovil[0];
+                        // Actualizar el texto del controlador de total
+                        totalController.text = "Total: ${total.toStringAsFixed(2)} Bs";
+                      } else {
+                        // Si la cantidad de cupones es menor a 5, mostrar un mensaje de que no hay suficientes cupones
+                        Toast.show(context, 'No tiene suficientes cupones');
+                      }
+                    },
+                    child: const Text('+'),
+                  ),
+                  // agregar un boton para deshacer el descuento de 5 cupones
+                  ElevatedButton(
+                    onPressed: () {
+                      // Si la cantidad de cupones usados es mayor o igual a 5
+                      if (cantidadCuponesUsados >= 5) {
+                        // Sumar 5 a la cantidad de cupones
+                        cantidadCupones += 5;
+                        cantidadCuponesUsados -= 5;
+                        // Actualizar el texto del controlador de cupones
+                        cuponesController.text = 'Usted tiene $cantidadCupones cupones';
+                        // Calcular el total con el descuento de 5 cupones
+                        double total = getTotal() + tarifaAutomovil[0];
+                        // Actualizar el texto del controlador de total
+                        totalController.text = "Total: ${total.toStringAsFixed(2)} Bs";
+                      } else {
+                        // Si la cantidad de cupones usados es menor a 5, mostrar un mensaje de que no se puede deshacer el descuento
+                        Toast.show(context, 'No puede deshacer el descuento');
+                      }
+                    },
+                    child: const Text('-'),
+                  ),
+
+
                 ],
               ),
             ),
@@ -909,8 +999,10 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                           fechaInicio: Timestamp.fromDate(selectedDate[0]!),
                           fechaFin: Timestamp.fromDate(selectedDate[1]!),
                           tipoVehiculo: typeVehicle,
-                          total: getTotal(),
+                          //total: getTotal(),
+                          total: double.parse(totalController.text.split(' ')[1]),
                           idVehiculo: _selectedVehicle,
+                          cantidaCupones: cantidadCupones
                         );
                         Navigator.push(
                           context,

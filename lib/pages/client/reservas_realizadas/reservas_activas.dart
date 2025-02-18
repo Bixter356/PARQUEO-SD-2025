@@ -141,7 +141,8 @@ class _ReservaFinalizadaClienteScreenState
 
   void generateUniqueCode() {
     setState(() {
-      uniqueCode = '${widget.reserva.idParqueo}-${widget.reserva.idPlaza}';
+      uniqueCode =
+          '${widget.reserva.idParqueo}-${widget.reserva.idPlaza}-${widget.reserva}';
     });
   }
 

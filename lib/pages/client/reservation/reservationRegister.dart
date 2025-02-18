@@ -569,7 +569,7 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
                               'cliente': cliente,
                               'vehiculo': vehiculo,
                               'parqueo': parqueo,
-                              'estado': 'pendiente',
+                              'estado': 'activo', //////////////////////
                               'fechaLlegada': widget.dataSearch.fechaInicio,
                               'fechaSalida': widget.dataSearch.fechaFin,
                               'fecha': DateTime.now(),
@@ -602,9 +602,29 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
   }
 
   Future<void> agregarReserva({required Map<String, dynamic> datos}) async {
+    
     await FirebaseFirestore.instance.collection(Collection.reservas).add(datos);
     Map<String, dynamic> data = {'estado': 'noDisponible'};
     DocumentReference plazaRef = widget.dataSearch.idPlaza!;
     await plazaRef.update(data);
+
+    //actualizar la cantidad de cupones del usuario
+    QuerySnapshot<Map<String, dynamic>> cupones = await FirebaseFirestore
+        .instance
+        .collection('usuario')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('cupones')
+        .where('idParqueo', isEqualTo: widget.dataSearch.idParqueo.id)
+        .get();
+    if (cupones.docs.isNotEmpty) {
+      //actualizar la cantidad de cupones dado widget.dataSearch.cantidadCupones
+      DocumentReference cuponRef = cupones.docs.first.reference;
+      Map<String, dynamic> data = {
+        'cantidad': cupones.docs.first.data()['cantidad'] -
+            widget.dataSearch.cantidaCupones
+      };
+      await cuponRef.update(data);
+
+    }
   }
 }
