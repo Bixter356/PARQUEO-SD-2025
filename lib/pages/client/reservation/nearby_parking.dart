@@ -166,10 +166,23 @@ class PlazaListScreenState extends State<PlazaListScreen> {
                   margin: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
                   child: ListTile(
+                    contentPadding: const EdgeInsets.all(16.0),
                     title: Text(
                       parqueo.nombre,
                       style: const TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Dirección: ${parqueo.direccion}'),
+                        Text('Descripción: ${parqueo.descripcion}'),
+                        Text(
+                            'Tarifas: Automóvil - ${parqueo.tarifaAutomovil}, Moto - ${parqueo.tarifaMoto}, Otro - ${parqueo.tarifaOtro}'),
+                        Text(
+                            'Horario: ${parqueo.horaApertura} - ${parqueo.horaCierre}'),
+                        Text('Puntaje: ${parqueo.puntaje}'),
+                      ],
                     ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
