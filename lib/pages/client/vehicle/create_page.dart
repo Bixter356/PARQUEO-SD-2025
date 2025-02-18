@@ -32,7 +32,7 @@ class _CreateVehicleState extends State<CreateVehicle> {
             color: Colors.white,
           ),
           title: const Text('Registrar Vehículo' , style: TextStyle(color: Colors.white),),
-          backgroundColor: const Color(0xFF02335B),
+          backgroundColor: const Color(0xFF031b30),
         ),
          body: SingleChildScrollView(
             child: Padding(

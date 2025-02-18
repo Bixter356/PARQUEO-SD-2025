@@ -26,7 +26,7 @@ class ParqueoDisponibleListScreenState
             'Parqueos disponibles en tu zona',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: const Color(0xFF02335B)),
+          backgroundColor: const Color(0xFF031b30)),
       body: StreamBuilder(
         stream: obtenerParqueosStream(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -234,7 +234,7 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
         title: Text(
           nombreParqueoController.text,
           style:
@@ -287,7 +287,7 @@ class _MostrarDatosParqueoScreenState extends State<MostrarDatosParqueoScreen> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: const Color.fromARGB(255, 84, 163, 243),
+                  color: const Color(0xFFe9c5a1),
                 ),
                 child: Column(
                   children: [

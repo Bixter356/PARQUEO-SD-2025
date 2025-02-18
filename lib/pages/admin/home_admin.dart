@@ -23,7 +23,7 @@ class HomeAdmin extends StatelessWidget {
                   bottomRight: Radius.circular(30),
                   bottomLeft: Radius.circular(30)),
               child: Container(
-                color: const Color.fromARGB(255, 4, 22, 87),
+                color: const Color(0xFF031b30),
               height: 270,
                 child: Center(
                     child: Column(

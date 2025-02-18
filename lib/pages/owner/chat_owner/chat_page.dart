@@ -82,7 +82,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         
         title: Text(widget.receiverEmail),
-        backgroundColor: const Color(0xFF041657),
+        backgroundColor: const Color(0xFF031b30),
         foregroundColor: const Color.fromARGB(255, 215, 215, 215),
         elevation: 0,
         

@@ -26,7 +26,7 @@ class ReservasPendientesCliente extends StatelessWidget {
           'Reservas Pendientes',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getReservasStream(),

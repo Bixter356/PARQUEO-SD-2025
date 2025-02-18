@@ -85,7 +85,7 @@ void didChangeDependencies() {
             color: Colors.white,
           ),
           title: const Text('Editar Vehículo' , style: TextStyle(color: Colors.white),),
-          backgroundColor: const Color(0xFF02335B),
+          backgroundColor: const Color(0xFF031b30),
         ),
 
         body: SingleChildScrollView(

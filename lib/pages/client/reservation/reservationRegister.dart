@@ -120,7 +120,7 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF02335B),
+      backgroundColor: Color(0xFF031b30),
       appBar: AppBar(
         backgroundColor: const Color(0xFD02334B),
         centerTitle: true,

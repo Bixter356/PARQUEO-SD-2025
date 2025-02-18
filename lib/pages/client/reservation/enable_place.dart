@@ -25,7 +25,7 @@ class SelectSpaceScreen extends StatelessWidget {
             'Plazas Disponibles',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: const Color(0xFF02335B)),
+          backgroundColor: const Color(0xFF031b30)),
       body: PlazaListScreen(
         dataSearch: dataSearch,
       ),

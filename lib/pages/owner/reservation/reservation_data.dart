@@ -18,7 +18,7 @@ class ReservaRequestScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Reservas Pendientes',
             style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
         // cambiar el color del icono de la flecha de regreso
         iconTheme: const IconThemeData(color: Colors.white),
       ),

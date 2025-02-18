@@ -22,8 +22,9 @@ class _MenuOwnerState extends State<MenuOwner> {
     const ReservasPendientes(),
     const ReservasFinalizadas(),
     const HomeChatOwnerScreen(),
-    const ProfilePage(),
     const QRScannerPage(),
+    const ProfilePage(),
+   
   ];
 
   @override
@@ -41,8 +42,8 @@ class _MenuOwnerState extends State<MenuOwner> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.date_range), label: 'Finalizadas'),
             BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
             BottomNavigationBarItem(icon: Icon(Icons.qr_code), label: 'Escanear'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
           ]),
     );
   }

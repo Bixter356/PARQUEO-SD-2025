@@ -16,7 +16,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
         title: const Text('Lista de vehículos', style: TextStyle(color: Colors.white),),   
         automaticallyImplyLeading: false,
       ),
@@ -172,8 +172,8 @@ class _VehicleScreenState extends State<VehicleScreen> {
               MaterialPageRoute(builder: (context) => CreateVehicle()),
             );
           },
-           backgroundColor: Color.fromARGB(255, 8, 64, 121),
-          child: const Icon(Icons.add),
+          backgroundColor: Color(0xFF031b30),
+          child: const Icon(Icons.add , color: Colors.white,),
         )
 
         // This trailing comma makes auto-formatting nicer for build methods.

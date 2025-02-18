@@ -46,14 +46,14 @@ class _MapClientState extends State<MapClient> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back , color: Colors.white,),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: const Text('Todos los Parqueos',
             style: TextStyle(fontSize: 20, color: Colors.white)),
-        backgroundColor: const Color(0xFF02335B)
+        backgroundColor: const Color(0xFF031b30)
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getAllParkings(),

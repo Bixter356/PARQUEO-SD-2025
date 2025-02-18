@@ -28,25 +28,15 @@ class CreateParqueoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-
       home: Scaffold(
-
         appBar: AppBar(
-
           title: const Text('Formulario de Parqueo'),
-
-          backgroundColor: const Color.fromARGB(255, 5, 126, 225),
-
+          backgroundColor: const Color(0xFF031b30),
         ),
-
         body: const ParqueoListScreen(),
-
       ),
-
     );
-
   }
-
 }
 class ParqueoListScreen extends StatefulWidget {
 
@@ -71,7 +61,7 @@ class ParqueoListScreenState extends State<ParqueoListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lista de Parqueos',style: TextStyle(color: Colors.white),),
-        backgroundColor: const Color(0xFF02335B)
+        backgroundColor: const Color(0xFF031b30)
       ),
       body: StreamBuilder(       
         stream: obtenerParqueosStream(),
@@ -185,7 +175,7 @@ class ParqueoListScreenState extends State<ParqueoListScreen> {
 
         },
 
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF031b30),
 
         child: const Icon(Icons.add),
 
@@ -280,7 +270,7 @@ class _AgregarParqueoScreen extends State<AgregarParqueoScreen> {
 
         title: const Text('Agregar Nuevo Parqueo'),
 
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF031b30),
 
       ),
 

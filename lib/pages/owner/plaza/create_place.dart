@@ -20,7 +20,7 @@ class CreatePlaceScreen extends StatelessWidget {
               },
             ),
             title: const Text('Lista de Plazas', style: TextStyle(color: Colors.white),),
-            backgroundColor: const Color(0xFF041657),
+            backgroundColor: const Color(0xFF031b30),
           ),
         body: PlazaListScreen(seccionRef: seccionRef),
       ),
@@ -361,8 +361,9 @@ class EditarPlazaScreenState extends State<EditarPlazaScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar Plaza'),
-        backgroundColor: Colors.blue,
+        iconTheme: IconThemeData(color: Colors.white),
+        title: const Text('Editar Plaza' , style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF031b30),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -469,12 +470,12 @@ class EditarPlazaScreenState extends State<EditarPlazaScreen> {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: const Color(0xFFF3AE2F),
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
               ),
               child: const Text(
                 'Guardar Cambios',
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0 , color: Colors.white),
               ),
             ),
           ],

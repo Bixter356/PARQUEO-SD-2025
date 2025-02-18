@@ -25,7 +25,7 @@ class ParkingListScreenState extends State<ParkingListScreen> {
             'Mis parqueos',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: const Color(0xFF041657),
+          backgroundColor: const Color(0xFF031b30),
         ),
         body: StreamBuilder(
           stream: getParking(),

@@ -18,7 +18,7 @@ class ReservationQRPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 2, 29, 51),
+        backgroundColor: const Color(0xFF031b30),
         title: const Text(
           'Código QR de la reserva',
           style: TextStyle(color: Colors.white),

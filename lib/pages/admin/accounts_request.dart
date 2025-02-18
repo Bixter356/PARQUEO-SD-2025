@@ -16,7 +16,7 @@ class AccountRequestScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
             title: const Text('Solicitudes de cuentas'),
-            backgroundColor: const Color.fromARGB(255, 5, 126, 225)),
+            backgroundColor: const Color(0xFF031b30)),
         body: const RequestListScreen(),
       );
   }
@@ -185,7 +185,7 @@ class RequestDetailScreenState extends State<RequestDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Solicitud'),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF031b30),
       ),
       body: SingleChildScrollView(
         child: Padding(

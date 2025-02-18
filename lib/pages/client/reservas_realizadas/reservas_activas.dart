@@ -28,7 +28,7 @@ class ReservasActivasCliente extends StatelessWidget {
         ),
         title: const Text('Reservas Activas',
             style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: getReservasStream(),
@@ -149,8 +149,8 @@ class _ReservaFinalizadaClienteScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reserva Activa'),
-        backgroundColor: const Color(0xFF02335B),
+        title: const Text('Reserva Activa' , style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF031b30),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(

@@ -25,7 +25,7 @@ class _HomeOwnerState extends State<HomeOwner> {
                   bottomRight: Radius.circular(30),
                   bottomLeft: Radius.circular(30)),
               child: Container(
-                color: const Color.fromARGB(255, 5, 40, 129),
+                color: const Color(0xFF031b30),
                 height: 280,
                 child: Center(
                     child: Column(

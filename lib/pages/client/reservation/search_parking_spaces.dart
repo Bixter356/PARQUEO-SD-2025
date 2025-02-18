@@ -337,7 +337,7 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
           iconSize: 30,
           onPressed: () => Navigator.pop(context),
         ),
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(23),

@@ -125,7 +125,7 @@ class _UpdateParkingState extends State<UpdateParking> {
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
         centerTitle: true,
         title: const Text(
           'Edicion de Parqueos',

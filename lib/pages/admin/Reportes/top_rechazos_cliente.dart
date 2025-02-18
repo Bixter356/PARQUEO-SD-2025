@@ -9,7 +9,7 @@ class ReportScreenRejectClient extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Clientes con mas rechazos', style: TextStyle(color: Colors.white),),
-        backgroundColor: const Color(0xFF041657),
+        backgroundColor: const Color(0xFF031b30),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('reserva').get(),

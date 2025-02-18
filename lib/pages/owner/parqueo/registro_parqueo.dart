@@ -161,7 +161,7 @@ class RegistroParqueoScreenState extends State<RegistroParqueoScreen> {
     //final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
         title: const Text(
           "Registro de Parqueo",
           style: TextStyle(

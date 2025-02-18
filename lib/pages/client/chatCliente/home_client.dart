@@ -22,7 +22,7 @@ class _HomeChatClientScreenState extends State<HomeChatClientScreen> {
 
       appBar: AppBar(
         title: const Text("Chats" , style: TextStyle(color: Colors.white), ),
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
         foregroundColor: Colors.grey,
         elevation: 0,
         //quitar la flecha de regreso

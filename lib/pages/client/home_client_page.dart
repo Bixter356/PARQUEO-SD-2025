@@ -21,7 +21,7 @@ class HomeClient extends StatelessWidget {
                   bottomRight: Radius.circular(30),
                   bottomLeft: Radius.circular(30)),
               child: Container(
-                color: const Color.fromARGB(255, 2, 51, 91),
+                color: const Color(0xFF031b30),
                 height: 250,
                 child: Center(
                     child: Column(

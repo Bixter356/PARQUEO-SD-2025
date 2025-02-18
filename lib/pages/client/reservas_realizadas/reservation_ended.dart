@@ -35,7 +35,7 @@ class ReservasFinalizadasCliente extends StatelessWidget {
           'Reservas Finalizadas',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color(0xFF02335B),
+        backgroundColor: const Color(0xFF031b30),
         automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<QuerySnapshot>(

@@ -13,7 +13,10 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Demo Home Page')),
+      appBar: AppBar(
+        title: const Text('Flutter Demo Home Page' , style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF031b30)
+      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {

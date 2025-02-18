@@ -36,7 +36,7 @@ class ProfilePage extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20 , color: Colors.white),
                   ),
                   centerTitle: true,
-                  backgroundColor: const Color(0xFF02335B)
+                  backgroundColor: const Color(0xFF031b30)
                 ),
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
