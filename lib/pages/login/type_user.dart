@@ -37,6 +37,7 @@ class TypeUser extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
+        backgroundColor: const Color(0xFF063055),
       ),
       body: SingleChildScrollView(
         child: Column(

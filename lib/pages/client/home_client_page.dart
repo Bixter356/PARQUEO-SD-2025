@@ -100,7 +100,7 @@ class HomeClient extends StatelessWidget {
                               // Agrega la lógica para el botón 'Reservas solicitadas' aquí
                             },
                             iconSize: 50,
-                            color: const Color.fromARGB(255, 4, 47, 82),
+                            color: const Color(0xFF031b30),
                           ),
                           const Text(
                             'Reservas Activas',

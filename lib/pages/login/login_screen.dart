@@ -60,26 +60,36 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[250],
-      body: SafeArea(
-        child: Center(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+             // Color(0xFF164450),
+              //Color(0xFF063055),
+              Color.fromARGB(255, 8, 62, 109),
+              Color(0xFF0c080e), 
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
-                // logo
-                const Icon(
-                  Icons.car_crash,
-                  size: 100,
+                const SizedBox(height: 20),
+                const Image(
+                  image: AssetImage('assets/Logo5.png'),
+                  width: 250,
+                  height: 250,
                 ),
-
-                const SizedBox(height: 50),
-
-                // welcome back, you've been missed!
+                //const SizedBox(height: 2),
                 Text(
                   'Bienvenido a LUH-PARKING!',
                   style: TextStyle(
-                    color: Colors.grey[700],
+                    color: const Color(0xFFFFFFFF),
                     fontSize: 16,
                   ),
                 ),
@@ -91,8 +101,9 @@ class LoginPage extends StatelessWidget {
                   controller: emailController,
                   hintText: 'Correo',
                   obscureText: false,
+                  
                 ),
-
+              
                 const SizedBox(height: 10),
 
                 // password textfield
@@ -112,7 +123,7 @@ class LoginPage extends StatelessWidget {
                     children: [
                       Text(
                         '¿ Olvidaste tu contraseña ?',
-                        style: TextStyle(color: Colors.grey[600]),
+                        style: TextStyle(color: const Color(0xFFFFFFFF)),
                       ),
                     ],
                   ),
@@ -189,14 +200,14 @@ class LoginPage extends StatelessWidget {
                     padding: const EdgeInsets.all(25),
                     margin: const EdgeInsets.symmetric(horizontal: 25),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 9, 57, 4),
+                      color: Color(0xFFc2af8f),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Center(
                       child: Text(
                         "Iniciar Sesión",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color(0xFF131313),
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -213,14 +224,14 @@ class LoginPage extends StatelessWidget {
                       Expanded(
                         child: Divider(
                           thickness: 0.5,
-                          color: Colors.grey[400],
+                          color: const Color(0xFFFFFFFF),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           'O continuar con:',
-                          style: TextStyle(color: Colors.grey[700]),
+                          style: TextStyle(color: const Color(0xFFFFFFFF)),
                         ),
                       ),
                       Expanded(
@@ -365,7 +376,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text(
                       '¿No tiene Cuenta?',
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: TextStyle(color: const Color(0xFFFFFFFF)),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
@@ -391,6 +402,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
         ),
+      ),
       ),
     );
   }
