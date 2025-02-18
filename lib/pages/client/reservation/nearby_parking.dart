@@ -55,6 +55,7 @@ class PlazaListScreen extends StatefulWidget {
 
 class PlazaListScreenState extends State<PlazaListScreen> {
   List<ParkLanding> parkLanding = [];
+  bool cargado = false;
 
   Future<void> checkFreePlaces() async {
     //obtener todos los parqueos
@@ -91,6 +92,7 @@ class PlazaListScreenState extends State<PlazaListScreen> {
           otro: otro,
           dataPark: doc.data() as Map<String, dynamic>));
     }
+    cargado = true;
   }
 
   @override
@@ -107,7 +109,7 @@ class PlazaListScreenState extends State<PlazaListScreen> {
       body: StreamBuilder(
         stream: getParking(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting || !cargado) {
             return const Center(
               child: CircularProgressIndicator(),
             );

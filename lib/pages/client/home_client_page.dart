@@ -70,9 +70,9 @@ class HomeClient extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const SelectParkingScreen()));
-                              
-                              
+                                      builder: (context) =>
+                                          const SelectParkingScreen()));
+
                               //SelectParkingScreen
                               // Agrega la lógica para el botón 'Mis parqueos' aquí
                             },
@@ -87,29 +87,31 @@ class HomeClient extends StatelessWidget {
                           )
                         ],
                       ),
-                      Column(children: [
-                        IconButton(
-                          icon: const Icon(Icons.assignment_rounded),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ReservasActivasCliente()));
-                            // Agrega la lógica para el botón 'Reservas solicitadas' aquí
-                          },
-                          iconSize: 50,
-                          color: const Color.fromARGB(255, 4, 47, 82),
-                        ),
-                        const Text(
-                          'Reservas Activas',
-                          style: TextStyle(
-                            fontSize: 16,
+                      Column(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.assignment_rounded),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ReservasActivasCliente()));
+                              // Agrega la lógica para el botón 'Reservas solicitadas' aquí
+                            },
+                            iconSize: 50,
+                            color: const Color.fromARGB(255, 4, 47, 82),
                           ),
-                        )
-                      ],),
+                          const Text(
+                            'Reservas Activas',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                      ),
                     ],
-                  )
-                  ,
+                  ),
                 ),
               ),
             ),
@@ -137,10 +139,10 @@ class HomeClient extends StatelessWidget {
                           size: 40,
                           color: Colors.green,
                         ),
-                      Text(
-                            "Buscar Parqueos",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                        Text(
+                          "Buscar Parqueos",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         SizedBox(height: 10),
                       ],
                     ),
@@ -148,52 +150,49 @@ class HomeClient extends StatelessWidget {
                 ),
               ),
             ),
-          
-            Positioned(
-              top: 480,
-              left: 0,
-              right: 0,
-              child: Card(
-                elevation: 4,
-                borderOnForeground: true,
-                margin: const EdgeInsets.symmetric(horizontal: 40),
-                child: Container(
-                  height: 135,
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.file_open_rounded),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const ReservasPendientesCliente()));
-                              //SelectParkingScreen
-                              // Agrega la lógica para el botón 'Mis parqueos' aquí
-                            },
-                            iconSize: 50,
-                            color: const Color.fromARGB(255, 3, 53, 94),
-                          ),
-                          const Text(
-                            'Reservas Pendientes',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          )
-                        ],
-                      ),],
-                  )
-                  ,
-                ),
-              ),
-            ),
-            
-          
-          
+
+            // Positioned(
+            //   top: 480,
+            //   left: 0,
+            //   right: 0,
+            //   child: Card(
+            //     elevation: 4,
+            //     borderOnForeground: true,
+            //     margin: const EdgeInsets.symmetric(horizontal: 40),
+            //     child: Container(
+            //       height: 135,
+            //       padding: const EdgeInsets.all(16),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           Column(
+            //             children: [
+            //               IconButton(
+            //                 icon: const Icon(Icons.file_open_rounded),
+            //                 onPressed: () {
+            //                   Navigator.push(
+            //                       context,
+            //                       MaterialPageRoute(
+            //                           builder: (context) => const ReservasPendientesCliente()));
+            //                   //SelectParkingScreen
+            //                   // Agrega la lógica para el botón 'Mis parqueos' aquí
+            //                 },
+            //                 iconSize: 50,
+            //                 color: const Color.fromARGB(255, 3, 53, 94),
+            //               ),
+            //               const Text(
+            //                 'Reservas Pendientes',
+            //                 style: TextStyle(
+            //                   fontSize: 16,
+            //                 ),
+            //               )
+            //             ],
+            //           ),],
+            //       )
+            //       ,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
