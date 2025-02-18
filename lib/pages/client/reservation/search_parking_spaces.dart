@@ -131,10 +131,8 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
         dimensiones['otroLargo'] = data['dimensiones']['otroLargo'];
         //------------------------------------------------------------------------------------
         //
-        print("Controoool");
         // si la consulta devuelve documentos, entonces se asigna la cantidad de cupones a la variable cantidadCupones
         if (cupones.docs.isNotEmpty) {
-          print(cupones.docs[0].data()['Cantidad']);
           //tomar el primer documento de la consulta, y asignar el valor del campo cantidad a la variable cantidadCupones
           cantidadCupones = cupones.docs[0].data()['Cantidad'];
 
@@ -896,11 +894,11 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                     ),
                   ),
                   // Agregar un botón para usar los cupones de 5 en 5, hasta que se acaben, y que se descuente el precio de una hora
-                  ElevatedButton(
+                  IconButton(
+                    icon: const Icon(Icons.add_circle, color: Colors.green),
                     onPressed: () {
                       // Si la cantidad de cupones es mayor o igual a 5
                       if (cantidadCupones >= 5) {
-
                         //validar que el total no pueda ser negativo, tambien que el total sea mayor a la tarifa del vehiculo seleccionado (typeVehicle)
                         switch (typeVehicle) {
                           case 'Automovil':
@@ -921,27 +919,30 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                               return;
                             }
                             break;
+                          default:
+                            return;
                         }
-
 
                         // Restar 5 a la cantidad de cupones
                         cantidadCupones -= 5;
                         cantidadCuponesUsados += 5;
                         // Actualizar el texto del controlador de cupones
-                        cuponesController.text = 'Usted tiene $cantidadCupones cupones';
+                        cuponesController.text =
+                            'Usted tiene $cantidadCupones cupones';
                         // Calcular el total con el descuento de 5 cupones
                         double total = getTotal() - tarifaAutomovil[0];
                         // Actualizar el texto del controlador de total
-                        totalController.text = "Total: ${total.toStringAsFixed(2)} Bs";
+                        totalController.text =
+                            "Total: ${total.toStringAsFixed(2)} Bs";
                       } else {
                         // Si la cantidad de cupones es menor a 5, mostrar un mensaje de que no hay suficientes cupones
                         Toast.show(context, 'No tiene suficientes cupones');
                       }
                     },
-                    child: const Text('+'),
                   ),
                   // agregar un boton para deshacer el descuento de 5 cupones
-                  ElevatedButton(
+                  IconButton(
+                    icon: const Icon(Icons.remove_circle, color: Colors.red),
                     onPressed: () {
                       // Si la cantidad de cupones usados es mayor o igual a 5
                       if (cantidadCuponesUsados >= 5) {
@@ -949,20 +950,32 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                         cantidadCupones += 5;
                         cantidadCuponesUsados -= 5;
                         // Actualizar el texto del controlador de cupones
-                        cuponesController.text = 'Usted tiene $cantidadCupones cupones';
-                        // Calcular el total con el descuento de 5 cupones
-                        double total = getTotal() + tarifaAutomovil[0];
-                        // Actualizar el texto del controlador de total
-                        totalController.text = "Total: ${total.toStringAsFixed(2)} Bs";
+                        cuponesController.text =
+                            'Usted tiene $cantidadCupones cupones';
+
+                        //dependiento del tipo de vehiculo seleccionado se le sumara o restara el descuento
+                        switch (typeVehicle) {
+                          case 'Automovil':
+                            totalController.text =
+                                "Total: ${(getTotal() + tarifaAutomovil[0]).toStringAsFixed(2)} Bs";
+                            break;
+                          case 'Moto':
+                            totalController.text =
+                                "Total: ${(getTotal() + tarifaMoto[0]).toStringAsFixed(2)} Bs";
+                            break;
+                          case 'Otro':
+                            totalController.text =
+                                "Total: ${(getTotal() + tarifaOtro[0]).toStringAsFixed(2)} Bs";
+                            break;
+                          default:
+                            return;
+                        }
                       } else {
                         // Si la cantidad de cupones usados es menor a 5, mostrar un mensaje de que no se puede deshacer el descuento
                         Toast.show(context, 'No puede deshacer el descuento');
                       }
                     },
-                    child: const Text('-'),
                   ),
-
-
                 ],
               ),
             ),
@@ -995,15 +1008,16 @@ class _ParkingSpacesState extends State<ParkingSpaces> {
                         // código para ejecutar cuando el botón está habilitado
                         DataReservationSearch dataSearch =
                             DataReservationSearch(
-                          idParqueo: widget.dataSearch.idParqueo,
-                          fechaInicio: Timestamp.fromDate(selectedDate[0]!),
-                          fechaFin: Timestamp.fromDate(selectedDate[1]!),
-                          tipoVehiculo: typeVehicle,
-                          //total: getTotal(),
-                          total: double.parse(totalController.text.split(' ')[1]),
-                          idVehiculo: _selectedVehicle,
-                          cantidaCupones: cantidadCupones
-                        );
+                                idParqueo: widget.dataSearch.idParqueo,
+                                fechaInicio:
+                                    Timestamp.fromDate(selectedDate[0]!),
+                                fechaFin: Timestamp.fromDate(selectedDate[1]!),
+                                tipoVehiculo: typeVehicle,
+                                //total: getTotal(),
+                                total: double.parse(
+                                    totalController.text.split(' ')[1]),
+                                idVehiculo: _selectedVehicle,
+                                cantidaCupones: cantidadCupones);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

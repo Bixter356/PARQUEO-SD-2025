@@ -602,7 +602,6 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
   }
 
   Future<void> agregarReserva({required Map<String, dynamic> datos}) async {
-    
     await FirebaseFirestore.instance.collection(Collection.reservas).add(datos);
     Map<String, dynamic> data = {'estado': 'noDisponible'};
     DocumentReference plazaRef = widget.dataSearch.idPlaza!;
@@ -620,11 +619,10 @@ class ReservaRegisterScreenState extends State<ReservaRegisterScreen> {
       //actualizar la cantidad de cupones dado widget.dataSearch.cantidadCupones
       DocumentReference cuponRef = cupones.docs.first.reference;
       Map<String, dynamic> data = {
-        'cantidad': cupones.docs.first.data()['cantidad'] -
+        'Cantidad':
             widget.dataSearch.cantidaCupones
       };
       await cuponRef.update(data);
-
     }
   }
 }
