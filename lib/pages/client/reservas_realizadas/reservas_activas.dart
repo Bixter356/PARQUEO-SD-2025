@@ -140,9 +140,8 @@ class _ReservaFinalizadaClienteScreenState
   }
 
   void generateUniqueCode() {
-    String userId = FirebaseAuth.instance.currentUser!.uid;
     setState(() {
-      uniqueCode = '${widget.reserva.idParqueo}-${widget.reserva.idPlaza}-${widget.reserva.id}-$userId';
+      uniqueCode = '${widget.reserva.idParqueo}-${widget.reserva.idPlaza}-${widget.reserva.id}-${widget.reserva.idCliente}';
     });
   }
 
